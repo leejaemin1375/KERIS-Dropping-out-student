@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin:0; background:oklch(0.975 0.004 250); font-family:'Noto Sans KR', system-ui, sans-serif; -webkit-font-smoothing:antialiased; color:oklch(0.28 0.02 255); }
+  a { color:oklch(0.48 0.13 250); text-decoration:none; }
+  a:hover { color:oklch(0.38 0.13 250); text-decoration:underline; }
+  button { font-family:inherit; cursor:pointer; }
+</style>
+</helmet>
+
+<div style="padding:24px; display:flex; justify-content:center">
+<div style="width:1040px; height:720px; background:oklch(0.975 0.004 250); border:1px solid oklch(0.9 0.008 250); border-radius:4px; overflow:hidden; position:relative; flex:none; display:flex; flex-direction:column">
+<div style="flex:1; min-height:0; display:flex; flex-direction:column">
+
+  <div style="background:#fff; border-bottom:1px solid oklch(0.9 0.008 250)">
+    <div style="margin:0 auto; padding:10px 22px 0; display:flex; align-items:flex-end; justify-content:space-between; gap:24px">
+      <div style="display:flex; flex-direction:column; gap:4px">
+        <div style="display:flex; align-items:center; gap:8px">
+          <div style="width:5px; height:5px; border-radius:2px; background:oklch(0.48 0.13 250)"></div>
+          <div style="font-size:10.5px; font-weight:500; letter-spacing:0.1em; color:oklch(0.55 0.015 255)">경기도교육청 · 교육데이터 분석</div>
+        </div>
+        <div style="font-size:19px; font-weight:700; letter-spacing:-0.02em; color:oklch(0.24 0.02 255)">고교 학업중단 위험 예측 및 맞춤형 지원 대시보드</div>
+      </div>
+      <div style="display:flex; gap:2px; align-self:flex-end">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="2">
+          <button onClick="{{ t.onClick }}" style="{{ t.style }}">
+            <span style="{{ t.numStyle }}">{{ t.num }}</span>
+            <span>{{ t.label }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    
+  </div>
+
+  <div style="margin:0 auto; padding:10px 18px 12px; width:100%; flex:1; min-height:0; overflow:hidden">
+
+    <sc-if value="{{ showNotice }}" hint-placeholder-val="{{ true }}">
+      
+    </sc-if>
+
+    <div style="display:none">
+      
+      
+    </div>
+
+    <!-- ============ TAB 1 ============ -->
+    <sc-if value="{{ isTab1 }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; flex-direction:column; gap:12px; height:100%">
+
+        <div style="display:flex; gap:12px">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="3">
+            <div style="flex:1; min-width:0; background:#fff; border:1px solid oklch(0.91 0.008 250); border-radius:9px; padding:9px 13px; display:flex; flex-direction:column; gap:4px">
+              <div style="font-size:11px; color:oklch(0.55 0.015 255); font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ k.label }}</div>
+              <div style="display:flex; align-items:baseline; gap:4px">
+                <span style="font-family:'IBM Plex Mono', monospace; font-size:23px; font-weight:600; letter-spacing:-0.02em; color:oklch(0.24 0.02 255)">{{ k.value }}</span>
+                <span style="font-size:12px; font-weight:500; color:oklch(0.45 0.02 255)">{{ k.unit }}</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px">
+                <span style="{{ k.badgeStyle }}">{{ k.badge }}</span>
+                <span style="font-size:10px; color:oklch(0.58 0.015 255); white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ k.sub }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div><div style="display:grid; grid-template-columns:minmax(0, 1.06fr) minmax(0, 1fr); gap:12px; flex:1; min-height:0; grid-template-rows:minmax(0, 1fr)">
+
+          <div style="background:#fff; border:1px solid oklch(0.91 0.008 250); border-radius:9px; padding:11px 13px 10px; display:flex; flex-direction:column; min-height:0; overflow:hidden">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:2px">
+              <div>
+                <div style="font-size:14px; font-weight:700; color:oklch(0.26 0.02 255)">시·군별 2027년 예상 위험도</div>
+                <div style="font-size:10.5px; color:oklch(0.58 0.015 255); margin-top:3px">수치는 2027년 예상 학업중단율(%)</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:10px; padding-top:2px; flex:none">
+                <span style="font-size:11px; color:oklch(0.6 0.015 255); white-space:nowrap; flex:none">낮음</span>
+                <sc-for list="{{ legend }}" as="l" hint-placeholder-count="4">
+                  <span style="{{ l.style }}"></span>
+                </sc-for>
+                <span style="font-size:11px; color:oklch(0.6 0.015 255); white-space:nowrap; flex:none">매우 높음</span>
+              </div>
+            </div>
+            <sc-if value="{{ isTileView }}" hint-placeholder-val="{{ true }}">
+              <div style="display:grid; grid-template-columns:repeat(6, 1fr); grid-auto-rows:minmax(0, 1fr); gap:6px; margin-top:10px; flex:1; min-height:0">
+                <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="31">
+                  <button onClick="{{ t.onClick }}" title="{{ t.title }}" style="{{ t.style }}">
+                    <span style="font-size:12px; font-weight:500">{{ t.short }}</span>
+                    <span style="font-family:'IBM Plex Mono', monospace; font-size:13.5px; font-weight:600">{{ t.rate }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isListView }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; gap:1px; margin-top:10px; flex:1; min-height:0; overflow:auto">
+                <div style="display:grid; grid-template-columns:26px minmax(0, 1fr) minmax(72px, 1.6fr) 56px; align-items:center; gap:10px; padding:0 4px 8px; font-size:11px; color:oklch(0.6 0.015 255); border-bottom:1px solid oklch(0.93 0.008 250)">
+                  <span>순위</span>
+                  <span>시·군</span>
+                  <span>위험도</span>
+                  <span style="text-align:right">2027</span>
+                </div>
+                <sc-for list="{{ regionList }}" as="g" hint-placeholder-count="31">
+                  <button onClick="{{ g.onClick }}" title="{{ g.title }}" style="{{ g.rowStyle }}">
+                    <span style="font-family:'IBM Plex Mono', monospace; font-size:12px; color:oklch(0.62 0.015 255)">{{ g.rank }}</span>
+                    <span style="display:flex; flex-direction:column; gap:1px; min-width:0">
+                      <span style="font-size:13px; font-weight:500; color:oklch(0.28 0.02 255)">{{ g.name }}</span>
+                      <span style="font-size:10.5px; color:oklch(0.62 0.015 255); white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ g.office }}</span>
+                    </span>
+                    <span style="height:14px; background:oklch(0.96 0.005 250); border-radius:3px; overflow:hidden; display:block">
+                      <span style="{{ g.fillStyle }}"></span>
+                    </span>
+                    <span style="font-family:'IBM Plex Mono', monospace; font-size:13px; font-weight:600; color:oklch(0.3 0.02 255); text-align:right">{{ g.rate }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </sc-if>
+            <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-top:10px">
+              <div style="font-size:10px; color:oklch(0.62 0.015 255)">{{ mapNote }}</div>
+              <div style="display:flex; border:1px solid oklch(0.9 0.01 250); border-radius:7px; overflow:hidden; flex:none">
+                <sc-for list="{{ viewOptions }}" as="v" hint-placeholder-count="2">
+                  <button style="{{ v.style }}" onClick="{{ v.onClick }}">{{ v.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px; min-width:0; min-height:0">
+
+            <div style="background:#fff; border:1px solid oklch(0.91 0.008 250); border-radius:9px; padding:11px 13px 8px; flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden">
+              <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:10px; flex-wrap:wrap">
+                <div>
+                  <div style="font-size:14px; font-weight:700; color:oklch(0.26 0.02 255)">학업 중단율 추세 예측</div>
+                  <div style="font-size:10.5px; color:oklch(0.58 0.015 255); margin-top:3px">2020–2025 실적 · 2026–2027 예측 구간</div>
+                </div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; padding-top:2px">
+                  <span style="display:flex; align-items:center; gap:6px; font-size:11.5px; color:oklch(0.5 0.02 255)"><span style="width:14px; height:2px; background:oklch(0.48 0.13 250)"></span>경기도 실적</span>
+                  <span style="display:flex; align-items:center; gap:6px; font-size:11.5px; color:oklch(0.5 0.02 255)"><span style="width:14px; height:0; border-top:2px dashed oklch(0.48 0.13 250)"></span>예측</span>
+                  <span style="display:flex; align-items:center; gap:6px; font-size:11.5px; color:oklch(0.5 0.02 255)"><span style="width:14px; height:0; border-top:2px dashed oklch(0.75 0.02 255)"></span>전국</span>
+                </div>
+              </div>
+              <svg viewBox="0 0 400 232" preserveAspectRatio="xMidYMid meet" style="width:100%; flex:1; min-height:0; margin-top:8px; overflow:visible">
+                <g>
+                  <sc-for list="{{ trend.grid }}" as="g" hint-placeholder-count="4">
+                    <line x1="36" x2="396" y1="{{ g.y }}" y2="{{ g.y }}" stroke="oklch(0.93 0.006 250)" stroke-width="1"></line>
+                  </sc-for>
+                </g>
+                <rect x="{{ trend.zoneX }}" y="14" width="{{ trend.zoneW }}" height="168" fill="oklch(0.96 0.015 250 / 0.55)"></rect>
+                <line x1="{{ trend.zoneX }}" x2="{{ trend.zoneX }}" y1="14" y2="182" stroke="oklch(0.82 0.05 250)" stroke-width="1" stroke-dasharray="3 3"></line>
+                <polygon points="{{ trend.bandPoints }}" fill="oklch(0.48 0.13 250 / 0.12)"></polygon>
+                <polyline points="{{ trend.nationPath }}" fill="none" stroke="oklch(0.78 0.02 255)" stroke-width="2" stroke-dasharray="5 4"></polyline>
+                <polyline points="{{ trend.actualPath }}" fill="none" stroke="oklch(0.48 0.13 250)" stroke-width="2.5" stroke-linejoin="round"></polyline>
+                <polyline points="{{ trend.predPath }}" fill="none" stroke="oklch(0.48 0.13 250)" stroke-width="2.5" stroke-dasharray="6 5" stroke-linejoin="round"></polyline>
+                <g>
+                  <sc-for list="{{ trend.points }}" as="p" hint-placeholder-count="8">
+                    <circle cx="{{ p.x }}" cy="{{ p.y }}" r="{{ p.r }}" fill="{{ p.fill }}" stroke="oklch(0.48 0.13 250)" stroke-width="2.5"></circle>
+                  </sc-for>
+                </g>
+                {{ trend.textEls }}
+              </svg>
+            </div>
+
+            
+
+          </div>
+        </div>
+
+        
+      </div>
+    </sc-if>
+
+    <!-- ============ TAB 2 ============ -->
+    <sc-if value="{{ isTab2 }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; flex-direction:column; gap:12px; height:100%">
+
+        <div style="background:#fff; border:1px solid oklch(0.91 0.008 250); border-radius:9px; padding:7px 12px; display:flex; align-items:center; gap:14px; flex:none">
+          <div style="font-size:12px; font-weight:700; color:oklch(0.3 0.02 255); white-space:nowrap">분석 대상</div>
+          <div style="display:flex; gap:10px; flex:1; min-width:0">
+            <sc-for list="{{ filters }}" as="f" hint-placeholder-count="2">
+              <label style="display:flex; align-items:center; gap:7px; flex:1; min-width:0">
+                <span style="font-size:10.5px; font-weight:500; color:oklch(0.55 0.015 255); white-space:nowrap">{{ f.label }}</span>
+                <span style="position:relative; display:block; flex:1; min-width:0">
+                  <select value="{{ f.value }}" onChange="{{ f.onChange }}" disabled="{{ f.disabled }}" style="{{ f.style }}">
+                    <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="4">
+                      <option value="{{ o.value }}">{{ o.label }}</option>
+                    </sc-for>
+                  </select>
+                  <span style="position:absolute; right:10px; top:50%; transform:translateY(-50%); font-size:9px; color:oklch(0.6 0.015 255); pointer-events:none">▾</span>
+                </span>
+              </label>
+            </sc-for>
+          </div>
+          <span style="font-size:10.5px; font-weight:600; color:oklch(0.36 0.1 250); background:oklch(0.96 0.02 250); border:1px solid oklch(0.88 0.04 250); border-radius:99px; padding:3px 9px; white-space:nowrap">{{ unitLabel }}</span>
+          <button onClick="{{ resetFilters }}" style="{{ resetBtnStyle }}">필터 초기화</button>
+        </div>
+
+        <div style="display:flex; gap:12px; flex:none">
+          <sc-for list="{{ kpis2 }}" as="k" hint-placeholder-count="3">
+            <div style="flex:1; min-width:0; background:#fff; border:1px solid oklch(0.91 0.008 250); border-radius:9px; padding:9px 13px; display:flex; flex-direction:column; gap:4px">
+              <div style="font-size:11px; color:oklch(0.55 0.015 255); font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ k.label }}</div>
+              <div style="display:flex; align-items:baseline; gap:4px">
+                <span style="font-family:'IBM Plex Mono', monospace; font-size:23px; font-weight:600; letter-spacing:-0.02em; color:oklch(0.24 0.02 255)">{{ k.value }}</span>
+                <span style="font-size:12px; font-weight:500; color:oklch(0.45 0.02 255)">{{ k.unit }}</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px">
+                <span style="{{ k.badgeStyle }}">{{ k.badge }}</span>
+                <span style="font-size:10px; color:oklch(0.58 0.015 255); white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ k.sub }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div><div style="display:grid; grid-template-columns:minmax(0, 0.86fr) minmax(0, 1.14fr); gap:12px; flex:1; min-height:0; grid-template-rows:minmax(0, 1fr)">
+
+          <div style="background:#fff; border:1px solid oklch(0.91 0.008 250); border-radius:9px; padding:11px 13px 10px; display:flex; flex-direction:column; min-height:0; overflow:hidden">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px">
+              <div>
+                <div style="font-size:14px; font-weight:700; color:oklch(0.26 0.02 255)">위험 학교 랭킹</div>
+                <div style="font-size:10.5px; color:oklch(0.58 0.015 255); margin-top:3px">{{ rankScope }}</div>
+              </div>
+              <span style="font-size:11px; font-weight:600; color:oklch(0.36 0.1 250); background:oklch(0.96 0.02 250); border:1px solid oklch(0.88 0.04 250); border-radius:99px; padding:3px 10px; white-space:nowrap; flex:none">{{ rankCount }}</span>
+            </div>
+            <div style="display:grid; grid-template-columns:26px minmax(0, 1fr) 66px 54px; align-items:center; gap:10px; padding:14px 6px 8px; font-size:11px; color:oklch(0.6 0.015 255); border-bottom:1px solid oklch(0.93 0.008 250)">
+              <span>순위</span>
+              <span>학교</span>
+              <span style="text-align:center">등급</span>
+              <span style="text-align:right">2027</span>
+            </div>
+            <div style="display:flex; flex-direction:column; flex:1; min-height:0; overflow:auto">
+              <sc-for list="{{ schoolRows }}" as="s" hint-placeholder-count="10">
+                <button onClick="{{ s.onClick }}" style="{{ s.rowStyle }}">
+                  <span style="font-family:'IBM Plex Mono', monospace; font-size:12px; color:oklch(0.62 0.015 255)">{{ s.rank }}</span>
+                  <span style="display:flex; flex-direction:column; gap:1px; min-width:0; text-align:left">
+                    <span style="{{ s.nameStyle }}">{{ s.name }}</span>
+                    <span style="font-size:10.5px; color:oklch(0.62 0.015 255); white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ s.office }}</span>
+                  </span>
+                  <span style="{{ s.badgeStyle }}">{{ s.grade }}</span>
+                  <span style="font-family:'IBM Plex Mono', monospace; font-size:13px; font-weight:600; color:oklch(0.3 0.02 255); text-align:right">{{ s.rate }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <div style="margin-top:8px; font-size:10px; color:oklch(0.62 0.015 255); line-height:1.5; text-wrap:pretty">{{ rankNote }}</div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px; min-width:0; min-height:0; height:100%">
+
+          <div style="background:#fff; border:1px solid oklch(0.91 0.008 250); border-radius:9px; padding:11px 13px 8px; min-width:0; display:flex; flex-direction:column; flex:1.18; min-height:0; overflow:hidden">
+            <div style="font-size:14px; font-weight:700; color:oklch(0.26 0.02 255)">위험 요인 프로파일</div>
+            <div style="font-size:10.5px; color:oklch(0.58 0.015 255); margin-top:3px">{{ radarScope }} · 2027년 예측 지표 (0–100 표준화)</div>
+            
+            <svg viewBox="58 22 364 244" preserveAspectRatio="xMidYMid meet" style="width:100%; flex:1; min-height:0; margin-top:4px; overflow:visible">
+              <g>
+                <sc-for list="{{ radar.rings }}" as="r" hint-placeholder-count="3">
+                  <polygon points="{{ r.points }}" fill="none" stroke="oklch(0.93 0.006 250)" stroke-width="1"></polygon>
+                </sc-for>
+              </g>
+              <g>
+                <sc-for list="{{ radar.spokes }}" as="s" hint-placeholder-count="5">
+                  <line x1="240" y1="134" x2="{{ s.x }}" y2="{{ s.y }}" stroke="oklch(0.93 0.006 250)" stroke-width="1"></line>
+                </sc-for>
+              </g>
+              <sc-if value="{{ compareProvince }}" hint-placeholder-val="{{ true }}">
+                <polygon points="{{ radar.avgPoints }}" fill="none" stroke="oklch(0.72 0.02 255)" stroke-width="2" stroke-dasharray="5 4"></polygon>
+              </sc-if>
+              <polygon points="{{ radar.points }}" fill="oklch(0.48 0.13 250 / 0.14)" stroke="oklch(0.48 0.13 250)" stroke-width="2.2"></polygon>
+              {{ radar.labelEls }}
+            </svg><div style="display:flex; gap:14px; justify-content:center; margin-top:2px; flex-wrap:wrap">
+              <span style="display:flex; align-items:center; gap:5px; font-size:10px; color:oklch(0.5 0.02 255)"><span style="width:12px; height:2px; background:oklch(0.48 0.13 250)"></span>{{ radarScope }}</span>
+              <span style="display:flex; align-items:center; gap:5px; font-size:10px; color:oklch(0.5 0.02 255)"><span style="width:12px; height:0; border-top:2px dashed oklch(0.72 0.02 255)"></span>경기도 예측 평균</span>
+            </div>
+          </div>
+
+          <div style="background:#fff; border:1px solid oklch(0.91 0.008 250); border-radius:9px; padding:10px 13px 8px; display:flex; flex-direction:column; flex:1; min-height:0; overflow:hidden">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px">
+              <div>
+                <div style="font-size:14px; font-weight:700; color:oklch(0.26 0.02 255)">미인정 결석률 추이</div>
+                <div style="font-size:10.5px; color:oklch(0.58 0.015 255); margin-top:3px">{{ radarScope }} · 2025학년도 (3월–2월)</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:14px; flex:none">
+                <span style="display:flex; flex-direction:column; gap:1px">
+                  <span style="font-size:10px; color:oklch(0.58 0.015 255)">평균</span>
+                  <span style="font-family:'IBM Plex Mono', monospace; font-size:15px; font-weight:600; color:oklch(0.24 0.02 255)">{{ attend.avg }}</span>
+                </span>
+                <span style="display:flex; flex-direction:column; gap:1px">
+                  <span style="font-size:10px; color:oklch(0.58 0.015 255)">최고 {{ attend.peak }}</span>
+                  <span style="font-family:'IBM Plex Mono', monospace; font-size:15px; font-weight:600; color:oklch(0.34 0.11 250)">{{ attend.peakVal }}</span>
+                </span>
+                <div style="display:flex; gap:5px">
+                  <sc-for list="{{ attend.toggles }}" as="t" hint-placeholder-count="2">
+                    <button onClick="{{ t.onClick }}" style="{{ t.style }}">{{ t.label }}</button>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div style="position:relative; margin-top:10px; flex:1; min-height:0; display:flex; flex-direction:column">
+              <div style="display:flex; align-items:flex-end; gap:6px; flex:1; min-height:0; border-bottom:1px solid oklch(0.9 0.008 250)">
+                <sc-for list="{{ attend.bars }}" as="b" hint-placeholder-count="12">
+                  <span style="flex:1; min-width:0; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; gap:3px; height:100%">
+                    <span style="{{ b.valStyle }}">{{ b.value }}</span>
+                    <span style="{{ b.barStyle }}"></span>
+                  </span>
+                </sc-for>
+              </div>
+              <div style="{{ attend.provLine }}"></div>
+            </div>
+            <div style="display:flex; gap:6px; margin-top:5px">
+              <sc-for list="{{ attend.bars }}" as="b" hint-placeholder-count="12">
+                <span style="flex:1; min-width:0; text-align:center"><span style="{{ b.labelStyle }}">{{ b.label }}</span></span>
+              </sc-for>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; margin-top:6px; font-size:10px; color:oklch(0.5 0.02 255)"><span style="width:12px; height:0; border-top:1px dashed oklch(0.7 0.02 255)"></span>{{ attend.provLabel }}</div>
+          </div>
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+    </sc-if>
+
+    <!-- TAB 3 (원인 요인 분석) 제거됨 -->
+
+  </div>
+</div>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;initialTab&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;1&quot;, &quot;2&quot;], &quot;default&quot;: &quot;1&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;동작&quot; },
+  &quot;highRiskThreshold&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;min&quot;: 1.0, &quot;max&quot;: 2.0, &quot;step&quot;: 0.1, &quot;default&quot;: 1.4, &quot;unit&quot;: &quot;%&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;예측 기준&quot; },
+  &quot;compareToProvince&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;예측 기준&quot; },
+  &quot;showDataNotice&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;표시&quot; }
+}">
+const YEARS = [2020, 2021, 2022, 2023, 2024, 2025];
+const PRED_YEARS = [2026, 2027];
+const TARGET = 2027;
+const BASE_YEAR = 2025;
+const YF = { 2020: 0.86, 2021: 0.90, 2022: 0.95, 2023: 0.99, 2024: 1.03, 2025: 1.07 };
+const PF = { 2026: 1.105, 2027: 1.14 };
+const NATION = { 2020: 1.18, 2021: 1.23, 2022: 1.28, 2023: 1.33, 2024: 1.38, 2025: 1.43, 2026: 1.47, 2027: 1.51 };
+
+const R = (n, c, r, base) => ({ name: n, col: c, row: r, base: base });
+const REGIONS = [
+  R("연천군", 3, 1, 1.86), R("포천시", 4, 1, 1.72), R("가평군", 5, 1, 1.69),
+  R("파주시", 2, 2, 1.29), R("양주시", 3, 2, 1.42), R("동두천시", 4, 2, 1.81), R("남양주시", 5, 2, 1.18),
+  R("김포시", 1, 3, 1.15), R("고양시", 2, 3, 0.98), R("의정부시", 3, 3, 1.46), R("구리시", 4, 3, 0.99), R("하남시", 5, 3, 0.94), R("양평군", 6, 3, 1.48),
+  R("부천시", 1, 4, 1.34), R("광명시", 2, 4, 1.02), R("과천시", 3, 4, 0.62), R("성남시", 4, 4, 1.05), R("광주시", 5, 4, 1.21), R("여주시", 6, 4, 1.52),
+  R("시흥시", 1, 5, 1.55), R("안산시", 2, 5, 1.62), R("안양시", 3, 5, 0.92), R("의왕시", 4, 5, 0.86), R("용인시", 5, 5, 0.88), R("이천시", 6, 5, 1.33),
+  R("화성시", 2, 6, 1.24), R("군포시", 3, 6, 0.95), R("수원시", 4, 6, 1.12), R("오산시", 5, 6, 1.37), R("안성시", 6, 6, 1.66),
+  R("평택시", 3, 7, 1.58)
+];
+const OFFICE = {
+  "수원시": "수원교육지원청", "고양시": "고양교육지원청", "용인시": "용인교육지원청", "성남시": "성남교육지원청",
+  "부천시": "부천교육지원청", "안산시": "안산교육지원청", "남양주시": "구리남양주교육지원청", "구리시": "구리남양주교육지원청",
+  "안양시": "안양과천교육지원청", "과천시": "안양과천교육지원청", "화성시": "화성오산교육지원청", "오산시": "화성오산교육지원청",
+  "평택시": "평택교육지원청", "의정부시": "의정부교육지원청", "시흥시": "시흥교육지원청", "파주시": "파주교육지원청",
+  "광명시": "광명교육지원청", "김포시": "김포교육지원청", "군포시": "군포의왕교육지원청", "의왕시": "군포의왕교육지원청",
+  "광주시": "광주하남교육지원청", "하남시": "광주하남교육지원청", "이천시": "이천교육지원청", "양주시": "동두천양주교육지원청",
+  "동두천시": "동두천양주교육지원청", "안성시": "안성교육지원청", "포천시": "포천교육지원청", "여주시": "여주교육지원청",
+  "양평군": "양평교육지원청", "가평군": "가평교육지원청", "연천군": "연천교육지원청"
+};
+const OFFICES = (function () {
+  var seen = {}, out = [];
+  REGIONS.forEach(function (r) { var o = OFFICE[r.name]; if (!seen[o]) { seen[o] = 1; out.push(o); } });
+  return out.sort();
+})();
+function officeRegions(office) { return REGIONS.filter(function (r) { return OFFICE[r.name] === office; }); }
+function officeRType(office) {
+  var rs = officeRegions(office);
+  var v = rs.length ? RTYPE_OF[rs[0].name] : 1;
+  return v == null ? 1 : v;
+}
+function schoolsOf(parent) { return ["A", "B", "C", "D", "E"].map(function (k) { return { key: parent + "|" + k, label: k + "고" }; }); }
+
+const BANDS = [
+  { max: 1.0, label: "낮음", bg: "oklch(0.93 0.03 250)", fg: "oklch(0.36 0.06 250)", solid: "oklch(0.78 0.07 250)" },
+  { max: 1.3, label: "보통", bg: "oklch(0.93 0.07 85)", fg: "oklch(0.4 0.08 70)", solid: "oklch(0.83 0.11 82)" },
+  { max: 1.6, label: "높음", bg: "oklch(0.88 0.1 50)", fg: "oklch(0.42 0.12 42)", solid: "oklch(0.72 0.15 48)" },
+  { max: 99, label: "매우 높음", bg: "oklch(0.85 0.11 25)", fg: "oklch(0.42 0.15 25)", solid: "oklch(0.56 0.17 25)" }
+];
+function band(v) { for (var i = 0; i < BANDS.length; i++) if (v < BANDS[i].max) return BANDS[i]; return BANDS[3]; }
+function bandIndex(v) { for (var i = 0; i < BANDS.length; i++) if (v < BANDS[i].max) return i; return 3; }
+function prand(s, salt) {
+  var t = salt + "#" + s, x = 2166136261;
+  for (var i = 0; i < t.length; i++) { x ^= t.charCodeAt(i); x = (x * 16777619) >>> 0; }
+  x ^= x >>> 15; x = (x * 2246822507) >>> 0; x ^= x >>> 13;
+  return ((x >>> 8) % 100000) / 100000;
+}
+function drift(name) { return (prand(name, "drift") - 0.45) * 0.15; }
+function actual(region, year, i) { return Math.round((region.base * YF[year] + ((i % 3) - 1) * 0.04) * 100) / 100; }
+function predict(region, year, i) { return Math.round((region.base * PF[year] + ((i % 3) - 1) * 0.04 + drift(region.name) * (year - BASE_YEAR)) * 100) / 100; }
+function f1(v) { return (Math.round(v * 10) / 10).toFixed(1); }
+function f2(v) { return v.toFixed(2); }
+function signed(v, d) { return (v > 0 ? "+" : v < 0 ? "−" : "") + (d === 1 ? f1(Math.abs(v)) : f2(Math.abs(v))); }
+
+const STYPES = [
+  { k: "일반고", m: 1.00, c: "oklch(0.52 0.13 250)", bg: "oklch(0.94 0.035 250)", fg: "oklch(0.34 0.1 250)" },
+  { k: "특성화고", m: 1.34, c: "oklch(0.55 0.16 30)", bg: "oklch(0.93 0.05 35)", fg: "oklch(0.4 0.14 30)" },
+  { k: "자율형공립고", m: 1.06, c: "oklch(0.58 0.11 155)", bg: "oklch(0.93 0.04 155)", fg: "oklch(0.36 0.09 155)" },
+  { k: "특목고", m: 0.58, c: "oklch(0.55 0.12 300)", bg: "oklch(0.94 0.035 300)", fg: "oklch(0.37 0.1 300)" }
+];
+const RTYPES = [
+  { k: "대도시형", c: "oklch(0.46 0.15 262)", bg: "oklch(0.94 0.04 262)", fg: "oklch(0.33 0.12 262)" },
+  { k: "중소도시형", c: "oklch(0.6 0.19 330)", bg: "oklch(0.95 0.045 330)", fg: "oklch(0.39 0.15 330)" },
+  { k: "도농복합·농촌형", c: "oklch(0.56 0.14 150)", bg: "oklch(0.94 0.05 150)", fg: "oklch(0.35 0.1 150)" }
+];
+const RTYPE_OF = {
+  "수원시": 0, "고양시": 0, "용인시": 0, "성남시": 0, "부천시": 0, "안산시": 0, "남양주시": 0, "화성시": 0, "안양시": 0,
+  "평택시": 1, "시향시": 1, "파주시": 1, "김포시": 1, "광명시": 1, "군포시": 1, "의왕시": 1, "구리시": 1, "오산시": 1,
+  "하남시": 1, "의정부시": 1, "광주시": 1, "과천시": 1,
+  "이천시": 2, "안성시": 2, "여주시": 2, "양주시": 2, "동두천시": 2, "포천시": 2, "양평군": 2, "가평군": 2, "연천군": 2
+};
+function typeOf(key) { var p = prand(key, "stype"); return p < 0.5 ? 0 : p < 0.76 ? 1 : p < 0.9 ? 2 : 3; }
+function metricsOf(name) {
+  return {
+    basic: 8 + prand(name, "b") * 15, violence: 1.8 + prand(name, "v") * 6.4,
+    emotion: 5 + prand(name, "e") * 11, ses: 20 + prand(name, "s") * 62, attend: 15 + prand(name, "a") * 60
+  };
+}
+const AXES = [
+  { key: "basic", label: "기초학력 미달 누적", short: "기초학력", unit: "미달률(%)", w: 28.6, v: function (m) { return Math.min(100, m.basic / 24 * 100); } },
+  { key: "attend", label: "장기결석·출결 불안정", short: "출결", unit: "불안정 지수", w: 24.3, v: function (m) { return Math.min(100, m.attend); } },
+  { key: "emotion", label: "정서·심리 위기", short: "정서·심리", unit: "위기 지수", w: 19.1, v: function (m) { return Math.min(100, m.emotion / 16 * 100); } },
+  { key: "violence", label: "학교폭력 피해 노출", short: "학교폭력", unit: "노출 지수", w: 15.4, v: function (m) { return Math.min(100, m.violence / 8.5 * 100); } },
+  { key: "ses", label: "지역 SES 취약도", short: "SES", unit: "취약 지수", w: 12.6, v: function (m) { return Math.min(100, m.ses); } }
+];
+function composite(name) {
+  var m = metricsOf(name), s = 0, w = 0;
+  AXES.forEach(function (a) { s += a.v(m) * a.w; w += a.w; });
+  return Math.max(0, Math.min(100, 50 + (s / w - 57) * 2.6));
+}
+function pearson(xs, ys) {
+  var n = xs.length; if (n < 3) return 0;
+  var mx = xs.reduce(function (a, b) { return a + b; }, 0) / n, my = ys.reduce(function (a, b) { return a + b; }, 0) / n;
+  var sxy = 0, sxx = 0, syy = 0;
+  for (var i = 0; i < n; i++) { var dx = xs[i] - mx, dy = ys[i] - my; sxy += dx * dy; sxx += dx * dx; syy += dy * dy; }
+  return sxx > 0 && syy > 0 ? sxy / Math.sqrt(sxx * syy) : 0;
+}
+function linfit(xs, ys) {
+  var n = xs.length;
+  var mx = xs.reduce(function (a, b) { return a + b; }, 0) / n, my = ys.reduce(function (a, b) { return a + b; }, 0) / n;
+  var sxy = 0, sxx = 0;
+  for (var i = 0; i < n; i++) { sxy += (xs[i] - mx) * (ys[i] - my); sxx += (xs[i] - mx) * (xs[i] - mx); }
+  var b = sxx > 0 ? sxy / sxx : 0;
+  return { b: b, a: my - b * mx };
+}
+
+const FACTORS = ["기초학력 미달 누적", "장기결석·출결 불안정", "정서·심리 위기 신호", "학교폭력 피해 노출", "지역 SES 취약도"];
+const FACTOR_W = [28.6, 24.3, 19.1, 15.4, 12.6];
+function factorsFor(scope) {
+  var raw = FACTORS.map(function (l, i) { return { label: l, w: FACTOR_W[i] * (0.66 + prand("f" + i + "|" + scope, "factor") * 0.82) }; });
+  var sum = raw.reduce(function (a, x) { return a + x.w; }, 0);
+  return raw.map(function (x) { return { label: x.label, w: x.w / sum * 100 }; })
+    .sort(function (a, b) { return b.w - a.w; })
+    .map(function (x, i) {
+      return {
+        rank: "0" + (i + 1), label: x.label, pct: f1(x.w) + "%",
+        fillStyle: { display: "block", height: "100%", width: Math.min(100, (x.w / 40) * 100) + "%", background: i === 0 ? "oklch(0.48 0.13 250)" : "oklch(0.72 0.07 250)", borderRadius: 3 }
+      };
+    });
+}
+
+class Component extends DCLogic {
+  state = { tab: 1, office: null, school: null, mapView: "tile" };
+
+  componentDidMount() {
+    var t = parseInt(this.props.initialTab, 10);
+    if (t >= 1 && t <= 2) this.setState({ tab: t });
+    this._fit = this._fit || React.createRef();
+    var self = this;
+    this._measure = function () {
+      var el = self._fit && self._fit.current;
+      if (!el) return;
+      var h = el.scrollHeight;
+      var s = h > 0 ? Math.min(1, 720 / h) : 1;
+      s = Math.round(s * 1000) / 1000;
+      if (Math.abs((self.state.fitScale || 1) - s) > 0.002) self.setState({ fitScale: s });
+    };
+    this._raf = setInterval(this._measure, 220);
+    this._measure();
+  }
+  componentWillUnmount() { clearInterval(this._raf); }
+
+  badge(text, tone) {
+    var b = tone || BANDS[0];
+    return { style: { background: b.bg, color: b.fg, fontSize: 11, fontWeight: 600, borderRadius: 4, padding: "3px 7px", whiteSpace: "nowrap" }, text: text };
+  }
+  metrics(name) {
+    return {
+      basic: 8 + prand(name, "b") * 15,
+      violence: 1.8 + prand(name, "v") * 6.4,
+      emotion: 5 + prand(name, "e") * 11,
+      ses: 20 + prand(name, "s") * 62,
+      attend: 15 + prand(name, "a") * 60
+    };
+  }
+
+  renderVals() {
+    var self = this;
+    var st = this.state;
+    var thr = Number(this.props.highRiskThreshold != null ? this.props.highRiskThreshold : 1.4);
+    var compareProvince = this.props.compareToProvince !== false;
+    var showNotice = this.props.showDataNotice !== false;
+
+    if (!this._fit) this._fit = React.createRef();
+    var fitScale = this.state.fitScale || 1;
+    var fitStyle = {
+      width: 1040, transformOrigin: "top left",
+      transform: "scale(" + fitScale + ")", padding: "0 0 20px"
+    };
+
+    var mean = function (a) { return a.reduce(function (x, y) { return x + y; }, 0) / a.length; };
+    var span = TARGET - BASE_YEAR;
+    var pred27 = REGIONS.map(function (r, i) { return { r: r, v: predict(r, TARGET, i), prev: actual(r, BASE_YEAR, i) }; });
+    var avg27 = mean(pred27.map(function (x) { return x.v; }));
+    var avg24 = mean(REGIONS.map(function (r, i) { return actual(r, BASE_YEAR, i); }));
+    var diff = avg27 - avg24;
+    var highCount = pred27.filter(function (x) { return x.v >= thr; }).length;
+    var highCount24 = REGIONS.filter(function (r, i) { return actual(r, BASE_YEAR, i) >= thr; }).length;
+
+    var svgText = function (key, x, y, text, opts) {
+      var o = opts || {};
+      return React.createElement("text", {
+        key: key, x: x, y: y, textAnchor: o.anchor || "middle", fontSize: o.size || 11,
+        fill: o.fill || "oklch(0.62 0.015 255)", fontWeight: o.weight || 400,
+        fontFamily: o.mono ? "'IBM Plex Mono', monospace" : "'Noto Sans KR', sans-serif"
+      }, text);
+    };
+
+    var tabs = [
+      { num: "1", label: "경기도 위험 전망" }, { num: "2", label: "지역·학교 분석" }
+    ].map(function (t, i) {
+      var active = st.tab === i + 1;
+      return {
+        num: t.num, label: t.label,
+        numStyle: {
+          fontFamily: "'IBM Plex Mono', monospace", fontSize: 11.5, fontWeight: 600,
+          background: active ? "oklch(0.48 0.13 250)" : "oklch(0.93 0.008 250)",
+          color: active ? "#fff" : "oklch(0.55 0.015 255)", borderRadius: 4, padding: "3px 7px"
+        },
+        style: {
+          display: "flex", alignItems: "center", gap: 9, background: "none", border: "none",
+          borderBottom: active ? "2px solid oklch(0.48 0.13 250)" : "2px solid transparent",
+          padding: "13px 18px 18px", fontSize: 14.5, fontWeight: active ? 700 : 500,
+          color: active ? "oklch(0.24 0.02 255)" : "oklch(0.52 0.015 255)", marginBottom: -1
+        },
+        onClick: function () { self.setState({ tab: i + 1 }); }
+      };
+    });
+
+    var qs = st.tab === 1
+      ? { lead: "2027년, 어디가 위험해지는가?", body: "최근 6년(2020–2025) 실적 추세를 기반으로 경기도 전체와 31개 시·군의 2027년 학업중단 위험을 추정합니다." }
+      : { lead: "어느 학교가 위험하고, 왜 위험한가?", body: "교육지원청과 학교를 선택하면 2027년 예측값과 위험 요인 구성이 해당 단위로 전환됩니다." };
+
+    // ---------- Tab 1 ----------
+    var b27 = band(avg27);
+    var dTone = diff > 0 ? BANDS[3] : BANDS[0];
+    var hTone = highCount > highCount24 ? BANDS[3] : highCount < highCount24 ? BANDS[0] : BANDS[1];
+    var kpis = [
+      (function () { var b = self.badge(b27.label, b27); return { label: "2027년 예상 학업중단율", value: f2(avg27), unit: "%", badge: b.text, badgeStyle: b.style, sub: "예측구간 " + f2(avg27 - 0.09) + "–" + f2(avg27 + 0.09) + "% · 전국 전망 " + f2(NATION[TARGET]) + "%" }; })(),
+      (function () { var b = self.badge(diff > 0 ? "상승 전망" : diff < 0 ? "하락 전망" : "보합", dTone); return { label: BASE_YEAR + "년 대비 예상 증감", value: signed(diff, 2), unit: "%p", badge: b.text, badgeStyle: b.style, sub: BASE_YEAR + "년 " + f2(avg24) + "% → 2027년 " + f2(avg27) + "% (연평균 " + signed(diff / span, 2) + "%p)" }; })(),
+      (function () { var b = self.badge("기준 " + f1(thr) + "%↑", hTone); return { label: "2027년 고위험 지역 수", value: String(highCount), unit: "개 시·군", badge: b.text, badgeStyle: b.style, sub: BASE_YEAR + "년 " + highCount24 + "개 → 2027년 " + highCount + "개 (전체 31개)" }; })()
+    ];
+
+    var legend = BANDS.map(function (b) { return { style: { width: 22, height: 9, borderRadius: 2, background: b.solid, display: "inline-block", flex: "none" } }; });
+    var goRegion = function (name) {
+      return function () { self.setState({ tab: 2, office: OFFICE[name], school: null }); };
+    };
+    var tiles = pred27.map(function (x) {
+      var b = band(x.v);
+      return {
+        short: x.r.name.replace(/(시|군)$/, ""), rate: f2(x.v),
+        title: x.r.name + " · " + OFFICE[x.r.name] + " 분석으로 이동",
+        onClick: goRegion(x.r.name),
+        style: {
+          gridColumn: x.r.col, gridRow: x.r.row, display: "flex", flexDirection: "column",
+          alignItems: "flex-start", justifyContent: "space-between", gap: 2, padding: "8px 9px",
+          background: b.bg, color: b.fg, borderRadius: 6,
+          border: "1px solid oklch(0.9 0.01 250 / 0.6)", textAlign: "left", cursor: "pointer",
+          fontFamily: "inherit"
+        }
+      };
+    });
+    var sorted = pred27.slice().sort(function (a, b) { return b.v - a.v; });
+    var listMax = sorted[0].v;
+    var regionList = sorted.map(function (x, i) {
+      var b = band(x.v);
+      return {
+        rank: String(i + 1), name: x.r.name, office: OFFICE[x.r.name], rate: f2(x.v) + "%",
+        title: x.r.name + " · " + OFFICE[x.r.name] + " 분석으로 이동",
+        onClick: goRegion(x.r.name),
+        rowStyle: {
+          display: "grid", gridTemplateColumns: "26px minmax(0, 1fr) minmax(72px, 1.6fr) 56px",
+          alignItems: "center", gap: 10, padding: "9px 4px", width: "100%",
+          border: "none", borderBottom: "1px solid oklch(0.955 0.005 250)",
+          background: i % 2 === 1 ? "oklch(0.988 0.003 250)" : "transparent",
+          textAlign: "left", cursor: "pointer", fontFamily: "inherit"
+        },
+        fillStyle: { display: "block", height: "100%", width: Math.round((x.v / listMax) * 100) + "%", background: b.solid, borderRadius: 3 }
+      };
+    });
+    var isTileView = st.mapView !== "list";
+    var viewOptions = [{ k: "tile", label: "카토그램" }, { k: "list", label: "리스트" }].map(function (o) {
+      var active = (st.mapView === "list") === (o.k === "list");
+      return {
+        label: o.label,
+        style: {
+          border: "none", padding: "6px 12px", fontSize: 11.5, fontWeight: active ? 700 : 500,
+          whiteSpace: "nowrap", flex: "none", lineHeight: 1.4,
+          background: active ? "oklch(0.48 0.13 250)" : "#fff",
+          color: active ? "#fff" : "oklch(0.5 0.015 255)"
+        },
+        onClick: function () { self.setState({ mapView: o.k }); }
+      };
+    });
+
+    // trend: 2020-2025 actual + 2026-2027 predicted
+    var series = YEARS.map(function (y) { return { year: y, v: mean(REGIONS.map(function (r, i) { return actual(r, y, i); })), pred: false }; })
+      .concat(PRED_YEARS.map(function (y) { return { year: y, v: mean(REGIONS.map(function (r, i) { return predict(r, y, i); })), pred: true }; }));
+    var allVals = series.map(function (s) { return s.v; }).concat(series.map(function (s) { return NATION[s.year]; }));
+    var lo = Math.min.apply(null, allVals) - 0.07, hi = Math.max.apply(null, allVals) + 0.07;
+    var ty = function (v) { return 176 - ((v - lo) / (hi - lo)) * 152; };
+    var tx = function (i) { return 52 + i * 45; };
+    var ci = function (y) { return y <= BASE_YEAR ? 0 : 0.05 * (y - BASE_YEAR); };
+    var ticks = [0, 1, 2, 3].map(function (k) { return lo + 0.07 + (hi - lo - 0.14) * (k / 3); });
+    var upper = series.filter(function (s) { return s.year >= BASE_YEAR; }).map(function (s, k) { return tx(YEARS.length - 1 + k) + "," + ty(s.v + ci(s.year)); });
+    var lower = series.filter(function (s) { return s.year >= BASE_YEAR; }).map(function (s, k) { return tx(YEARS.length - 1 + k) + "," + ty(s.v - ci(s.year)); }).reverse();
+    var trend = {
+      grid: ticks.map(function (v) { return { y: ty(v), ty: ty(v) + 4, label: f2(v) + "%" }; }),
+      actualPath: series.filter(function (s) { return !s.pred; }).map(function (s, i) { return tx(i) + "," + ty(s.v); }).join(" "),
+      predPath: series.filter(function (s) { return s.year >= BASE_YEAR; }).map(function (s, k) { return tx(YEARS.length - 1 + k) + "," + ty(s.v); }).join(" "),
+      nationPath: series.map(function (s, i) { return tx(i) + "," + ty(NATION[s.year]); }).join(" "),
+      bandPoints: upper.concat(lower).join(" "),
+      zoneX: (tx(YEARS.length - 1) + 6).toFixed(1),
+      zoneW: (tx(series.length - 1) + 14 - tx(YEARS.length - 1) - 6).toFixed(1),
+      points: series.map(function (s, i) {
+        var target = s.year === TARGET;
+        return {
+          x: tx(i), y: ty(s.v), r: target ? 5 : s.pred ? 3.5 : 3,
+          fill: s.pred ? "#fff" : "oklch(0.48 0.13 250)",
+          val: f2(s.v), year: String(s.year), labelY: ty(s.v) - 11,
+          labelFill: target ? "oklch(0.32 0.13 250)" : s.pred ? "oklch(0.5 0.06 250)" : "oklch(0.5 0.02 255)",
+          labelWeight: target ? 700 : 600,
+          axisFill: target ? "oklch(0.32 0.13 250)" : "oklch(0.6 0.015 255)",
+          axisWeight: target ? 700 : 400
+        };
+      })
+    };
+    trend.textEls = React.createElement("g", null,
+      trend.grid.map(function (g, i) { return svgText("g" + i, 30, g.ty, g.label, { anchor: "end", mono: true, size: 10.5 }); }),
+      trend.points.map(function (p, i) { return svgText("v" + i, p.x, p.labelY, p.val, { size: 11, weight: p.labelWeight, fill: p.labelFill, mono: true }); }),
+      trend.points.map(function (p, i) { return svgText("y" + i, p.x, 198, p.year, { size: 11.5, fill: p.axisFill, weight: p.axisWeight }); }),
+      [svgText("zl", Number(trend.zoneX) + Number(trend.zoneW) / 2, 220, "예측 구간 (2026–2027)", { size: 11, fill: "oklch(0.55 0.06 250)", weight: 500 })]
+    );
+
+    var methodItems = [
+      { k: "추정 방식", v: "최근 6년(2020–2025) 시·군별 학업중단율 추세를 선형 외삽하고, 지역별 위험요인 가중치를 반영해 2027년 값을 추정합니다." },
+      { k: "예측 구간", v: "음영은 연도별 누적 불확실성 구간(2027년 ±" + f2(0.1) + "%p)이며, 예측 시점이 멀어질수록 넓어집니다." },
+      { k: "해석 유의", v: "정책 개입이 없을 때의 기준선(baseline) 전망입니다. 개입 효과는 반영되지 않았습니다." }
+    ];
+
+    // ---------- Tab 2 ----------
+    var nodeRate = function (name, parent) {
+      var tm = STYPES[typeOf(name)].m;
+      var base = parent * 0.5 + avg27 * 0.5;
+      return Math.round(base * tm * (0.55 + composite(name) / 100 * 0.9) * (0.97 + prand(name, "nr") * 0.06) * 100) / 100;
+    };
+    var officeAvg = function (o) { var rs = officeRegions(o); return Math.round(mean(rs.map(function (r) { return predict(r, TARGET, REGIONS.indexOf(r)); })) * 100) / 100; };
+    var officeRanked = OFFICES.map(function (o) { return { o: o, v: officeAvg(o) }; }).sort(function (a, b) { return b.v - a.v; });
+
+    var schoolParent = st.office;
+    var oRate = st.office ? officeAvg(st.office) : avg27;
+    var scopeRate = st.school ? nodeRate(st.school, oRate) : oRate;
+    var scopeName = st.school ? st.school.split("|")[1] + "고" : (st.office || "경기도");
+    var unitLabel = st.school ? "개별 학교 예측" : st.office ? "교육지원청 관할 예측" : "경기도 전체 예측";
+    var resetFilters = function () { self.setState({ office: null, school: null }); };
+
+    var attendKey = st.school || st.office || "경기도";
+    var attendView = st.attendView === "quarter" ? "quarter" : "month";
+    var MONTHS = ["3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월", "1월", "2월"];
+    var MSEASON = [0.72, 0.86, 0.95, 1.08, 0.62, 0.58, 1.02, 1.14, 1.26, 1.42, 1.22, 0.96];
+    var attBase = scopeRate * 1.25;
+    var monthVals = MONTHS.map(function (m, i) {
+      return Math.round(attBase * MSEASON[i] * (0.9 + prand(attendKey + m, "att") * 0.22) * 100) / 100;
+    });
+    var QLABEL = ["1분기 (3–5월)", "2분기 (6–8월)", "3분기 (9–11월)", "4분기 (12–2월)"];
+    var quarterVals = [0, 1, 2, 3].map(function (q) {
+      return Math.round(mean(monthVals.slice(q * 3, q * 3 + 3)) * 100) / 100;
+    });
+    var attLabels = attendView === "quarter" ? QLABEL : MONTHS;
+    var attVals = attendView === "quarter" ? quarterVals : monthVals;
+    var attMax = Math.max.apply(null, attVals);
+    var attAvg = mean(attVals);
+    var peakIdx = attVals.indexOf(attMax);
+    var provAvg = attAvg * 0.88;
+    var attend = {
+      view: attendView,
+      avg: f2(attAvg) + "%",
+      peak: attLabels[peakIdx].split(" ")[0],
+      peakVal: f2(attMax) + "%",
+      provLine: { position: "absolute", left: 0, right: 0, bottom: (provAvg / (attMax * 1.16) * 100) + "%", height: 0, borderTop: "1px dashed oklch(0.7 0.02 255)", pointerEvents: "none" },
+      provLabel: "경기도 평균 " + f2(provAvg) + "%",
+      toggles: [{ key: "month", label: "월별" }, { key: "quarter", label: "분기별" }].map(function (t) {
+        var on = attendView === t.key;
+        return {
+          label: t.label,
+          onClick: function () { self.setState({ attendView: t.key }); },
+          style: {
+            appearance: "none", border: "1px solid " + (on ? "oklch(0.6 0.1 250)" : "oklch(0.9 0.008 250)"),
+            background: on ? "oklch(0.96 0.03 250)" : "#fff", color: on ? "oklch(0.34 0.11 250)" : "oklch(0.55 0.015 255)",
+            fontSize: 11.5, fontWeight: 600, fontFamily: "'Noto Sans KR', sans-serif",
+            borderRadius: 6, padding: "5px 12px", cursor: "pointer", whiteSpace: "nowrap"
+          }
+        };
+      }),
+      bars: attVals.map(function (v, i) {
+        var t = attMax > 0 ? v / attMax : 0;
+        return {
+          label: attLabels[i].replace(/ .*/, ""),
+          value: f2(v),
+          barStyle: {
+            display: "block", width: "100%", height: (v / (attMax * 1.16) * 100) + "%",
+            background: i === peakIdx ? "oklch(0.48 0.13 250)" : "oklch(" + (0.9 - t * 0.16).toFixed(3) + " " + (0.03 + t * 0.05).toFixed(3) + " 250)",
+            borderRadius: "4px 4px 0 0", minHeight: 3, transition: "height .25s ease"
+          },
+          valStyle: {
+            fontFamily: "'IBM Plex Mono', monospace", fontSize: attendView === "quarter" ? 13 : 10.5,
+            fontWeight: 600, color: i === peakIdx ? "oklch(0.34 0.11 250)" : "oklch(0.45 0.02 255)"
+          },
+          labelStyle: {
+            fontSize: attendView === "quarter" ? 12 : 10.5,
+            color: i === peakIdx ? "oklch(0.34 0.11 250)" : "oklch(0.6 0.015 255)",
+            fontWeight: i === peakIdx ? 600 : 400, whiteSpace: "nowrap"
+          }
+        };
+      }),
+      note: attendView === "quarter"
+        ? "분기 값은 해당 3개월 미인정 결석률의 평균입니다. 학기말·겨울 구간에서 결석률이 누적되는 경향이 관측됩니다."
+        : "미인정 결석률 = (미인정 결석 일수 ÷ 재적 학생 수업일수) × 100. 방학이 포함된 7·8월은 수업일수 기준으로 보정된 값입니다."
+    };
+    var filtersActive = !!(st.office || st.school);
+
+    var filters = [
+      {
+        label: "교육지원청", value: st.office || "전체", disabled: false,
+        options: ["전체"].concat(OFFICES),
+        onChange: function (e) { var v = e.target.value; self.setState({ office: v === "전체" ? null : v, school: null }); }
+      },
+      {
+        label: "학교", value: st.school || "전체", disabled: !schoolParent,
+        options: ["전체"].concat(schoolParent ? schoolsOf(schoolParent).map(function (s) { return s.key; }) : []),
+        optionLabels: schoolParent ? ["전체"].concat(schoolsOf(schoolParent).map(function (s) { return s.label; })) : ["전체"],
+        onChange: function (e) { var v = e.target.value; self.setState({ school: v === "전체" ? null : v }); }
+      }
+    ].map(function (f) {
+      var labels = f.optionLabels || f.options;
+      return {
+        label: f.label, value: f.value, disabled: f.disabled, onChange: f.onChange,
+        options: f.options.map(function (o, i) { return { value: o, label: labels[i] }; }),
+        style: {
+          appearance: "none", WebkitAppearance: "none", width: "100%", background: f.disabled ? "oklch(0.97 0.004 250)" : "#fff",
+          border: "1px solid " + (f.value !== "전체" ? "oklch(0.72 0.09 250)" : "oklch(0.9 0.008 250)"),
+          borderRadius: 8, padding: "7px 30px 7px 11px", fontSize: 12.5, fontFamily: "inherit",
+          color: f.disabled ? "oklch(0.7 0.015 255)" : "oklch(0.26 0.02 255)", cursor: f.disabled ? "not-allowed" : "pointer"
+        }
+      };
+    });
+
+    var allSchools = [];
+    OFFICES.forEach(function (o) {
+      var oa = officeAvg(o);
+      schoolsOf(o).forEach(function (s) { allSchools.push({ key: s.key, label: s.label, office: o, v: nodeRate(s.key, oa) }); });
+    });
+    var pool = (st.office ? allSchools.filter(function (s) { return s.office === st.office; }) : allSchools)
+      .slice().sort(function (a, b) { return b.v - a.v; });
+    if (!st.office) pool = pool.slice(0, 30);
+    var schoolRows = pool.map(function (s, i) {
+      var b = band(s.v);
+      var sel = st.school === s.key;
+      return {
+        rank: String(i + 1), name: s.label, office: s.office.replace("교육지원청", ""), rate: f2(s.v) + "%", grade: b.label,
+        onClick: function () {
+          if (self.state.school === s.key) self.setState({ office: null, school: null });
+          else self.setState({ office: s.office, school: s.key });
+        },
+        nameStyle: { fontSize: 13, fontWeight: sel ? 700 : 500, color: sel ? "oklch(0.32 0.13 250)" : "oklch(0.28 0.02 255)", whiteSpace: "nowrap" },
+        badgeStyle: { background: b.bg, color: b.fg, fontSize: 10.5, fontWeight: 600, borderRadius: 4, padding: "3px 0", textAlign: "center", whiteSpace: "nowrap" },
+        rowStyle: {
+          display: "grid", gridTemplateColumns: "26px minmax(0, 1fr) 66px 54px", alignItems: "center", gap: 10,
+          padding: "8px 6px", border: "none", borderBottom: "1px solid oklch(0.955 0.005 250)",
+          borderLeft: "3px solid " + (sel ? "oklch(0.48 0.13 250)" : "transparent"),
+          background: sel ? "oklch(0.965 0.022 250)" : i % 2 === 1 ? "oklch(0.988 0.003 250)" : "transparent",
+          textAlign: "left", cursor: "pointer", width: "100%"
+        }
+      };
+    });
+    var rankScope = st.office ? st.office + " 관할 고교 " + pool.length + "개교" : "도내 2027년 고위험 예측 상위 " + pool.length + "개교";
+    var rankCount = st.school ? "선택 " + scopeName + " · 다시 누르면 해제" : "행을 선택하세요";
+    var rankNote = st.office
+      ? "※ 지원청 필터가 적용된 상태입니다. 도내 전체 순위를 보려면 필터를 초기화하십시오."
+      : "※ 2027년 예상 학업중단율 내림차순 · 행을 선택하면 오른쪽 상세가 해당 학교로 전환됩니다.";
+
+    var bi = bandIndex(scopeRate), sb = BANDS[bi];
+    var levelKpi;
+    if (st.school) {
+      var peers = schoolsOf(schoolParent).map(function (s) { return { k: s.key, l: s.label, v: nodeRate(s.key, oRate) }; }).sort(function (a, b) { return b.v - a.v; });
+      var rk = peers.findIndex(function (p) { return p.k === st.school; }) + 1;
+      var bb = self.badge(rk <= 2 ? "관할 상위권" : "관할 중하위", rk <= 2 ? BANDS[3] : BANDS[1]);
+      levelKpi = { label: "지역 내 위험 수준", value: String(rk), unit: "위 / " + peers.length + "개교", badge: bb.text, badgeStyle: bb.style, sub: schoolParent + " 관할 고교 중 · 관할 평균 " + f2(oRate) + "%" };
+    } else if (st.office) {
+      var rk2 = officeRanked.findIndex(function (x) { return x.o === st.office; }) + 1;
+      var bb2 = self.badge(rk2 <= 8 ? "도내 상위권" : "도내 중하위", rk2 <= 8 ? BANDS[3] : BANDS[1]);
+      levelKpi = { label: "지역 내 위험 수준", value: String(rk2), unit: "위 / " + officeRanked.length + "개청", badge: bb2.text, badgeStyle: bb2.style, sub: "도내 교육지원청 예측 위험도 순위" };
+    } else {
+      var bb3 = self.badge("기준 " + f1(thr) + "%↑", hTone);
+      levelKpi = { label: "도내 고위험 시·군 비중", value: f1(highCount / REGIONS.length * 100), unit: "%", badge: bb3.text, badgeStyle: bb3.style, sub: "31개 시·군 중 " + highCount + "개가 예측 기준 초과" };
+    }
+    var kpis2 = [
+      (function () { var b = self.badge(sb.label, sb); return { label: scopeName + " 2027년 예상 학업중단율", value: f2(scopeRate), unit: "%", badge: b.text, badgeStyle: b.style, sub: "경기도 전망 " + f2(avg27) + "% 대비 " + signed(scopeRate - avg27, 2) + "%p" }; })(),
+      (function () { var b = self.badge(sb.label, sb); return { label: "예상 위험도 등급", value: String(bi + 1), unit: "단계 / 4", badge: b.text, badgeStyle: b.style, sub: bi === 3 ? "1.6% 이상 · 우선 개입 검토" : bi === 2 ? "1.3–1.6% · 집중 모니터링" : bi === 1 ? "1.0–1.3% · 정기 관찰" : "1.0% 미만 · 안정 구간" }; })(),
+      levelKpi
+    ];
+
+    var factors = factorsFor(st.school || st.office || "경기도");
+    var mReg = this.metrics(scopeName + "|" + (st.office || ""));
+    var radarVals = [
+      { label: "정서·심리 위기", v: Math.min(100, mReg.emotion / 16 * 100) },
+      { label: "학교폭력 노출", v: Math.min(100, mReg.violence / 8.5 * 100) },
+      { label: "기초학력 미달", v: Math.min(100, mReg.basic / 24 * 100) },
+      { label: "지역 SES 취약", v: mReg.ses },
+      { label: "출결 불안정", v: mReg.attend }
+    ];
+    var avgRadar = [55, 48, 52, 50, 46];
+    var CX = 240, CY = 134, RMAX = 98;
+    var poly = function (vals) {
+      return vals.map(function (v, i) {
+        var a = -Math.PI / 2 + i * (2 * Math.PI / 5), rr = (v / 100) * RMAX;
+        return (CX + Math.cos(a) * rr).toFixed(1) + "," + (CY + Math.sin(a) * rr).toFixed(1);
+      }).join(" ");
+    };
+    var radar = {
+      rings: [RMAX / 3, RMAX / 3 * 2, RMAX].map(function (rr) {
+        return { points: [0, 1, 2, 3, 4].map(function (i) { var a = -Math.PI / 2 + i * (2 * Math.PI / 5); return (CX + Math.cos(a) * rr).toFixed(1) + "," + (CY + Math.sin(a) * rr).toFixed(1); }).join(" ") };
+      }),
+      spokes: [0, 1, 2, 3, 4].map(function (i) { var a = -Math.PI / 2 + i * (2 * Math.PI / 5); return { x: (CX + Math.cos(a) * RMAX).toFixed(1), y: (CY + Math.sin(a) * RMAX).toFixed(1) }; }),
+      points: poly(radarVals.map(function (r) { return r.v; })),
+      avgPoints: poly(avgRadar),
+      labels: radarVals.map(function (r, i) {
+        var a = -Math.PI / 2 + i * (2 * Math.PI / 5), rr = RMAX + 22;
+        var x = CX + Math.cos(a) * rr, y = CY + Math.sin(a) * rr;
+        var above = Math.sin(a) < -0.1;
+        return {
+          label: r.label, val: f1(r.v), x: x.toFixed(1),
+          y: (above ? y - 8 : y + 6).toFixed(1), y2: (above ? y + 13 : y + 27).toFixed(1),
+          anchor: Math.abs(Math.cos(a)) < 0.2 ? "middle" : (Math.cos(a) > 0 ? "start" : "end")
+        };
+      })
+    };
+    radar.labelEls = React.createElement("g", null,
+      radar.labels.map(function (l, i) {
+        return React.createElement("g", { key: "rl" + i },
+          svgText("n" + i, l.x, l.y, l.label, { size: 16, weight: 500, fill: "oklch(0.42 0.02 255)", anchor: l.anchor }),
+          svgText("rv" + i, l.x, l.y2, l.val, { size: 14.5, anchor: l.anchor, mono: true })
+        );
+      })
+    );
+
+    // ---------- Tab 3 : 기준 × 요인 × 학업중단율 ----------
+    var axisKey = st.axis || "attend";
+    var ax = AXES[0];
+    AXES.forEach(function (a) { if (a.key === axisKey) ax = a; });
+    var basis = ["type", "rtype"].indexOf(st.basis) >= 0 ? st.basis : "all";
+    var catBasis = basis === "type" || basis === "rtype";
+    var cats = basis === "rtype" ? RTYPES : STYPES;
+    var catIdx = function (s) { return basis === "rtype" ? s.ri : s.ti; };
+    var cf = catBasis && st.catFilter != null ? st.catFilter : null;
+
+    var typed = allSchools.map(function (s) {
+      var ti = typeOf(s.key), m = metricsOf(s.key), ri = officeRType(s.office);
+      return { key: s.key, label: s.label, office: s.office, v: s.v, ti: ti, type: STYPES[ti], ri: ri, rt: RTYPES[ri], m: m };
+    });
+    var xOf = function (u, a) {
+      var s = 0;
+      u.ms.forEach(function (m) { s += a.v(m); });
+      return s / u.ms.length;
+    };
+    var units, unitWord;
+    if (basis === "region") {
+      units = OFFICES.map(function (o) {
+        var rows = typed.filter(function (s) { return s.office === o; });
+        var v = mean(rows.map(function (s) { return s.v; }));
+        return { label: o.replace("교육지원청", ""), sub: rows.length + "개교", ms: rows.map(function (s) { return s.m; }), v: v, dotR: 6.2, color: band(v).solid, op: 0.85 };
+      });
+      unitWord = "점 1개 = 교육지원청";
+    } else {
+      var pooled = cf != null ? typed.filter(function (s) { return catIdx(s) === cf; }) : typed;
+      units = pooled.map(function (s) {
+        return {
+          label: s.label, sub: s.office.replace("교육지원청", "") + " · " + (basis === "rtype" ? s.rt.k : s.type.k), ms: [s.m], v: s.v, dotR: 4.3,
+          color: catBasis ? cats[catIdx(s)].c : "oklch(0.55 0.1 250)", op: catBasis ? 0.6 : 0.48
+        };
+      });
+      unitWord = "점 1개 = 학교";
+    }
+
+    var RANKMARK = ["①", "②", "③", "④", "⑤"];
+    var corrRows = AXES.map(function (a) {
+      return { a: a, r: pearson(units.map(function (u) { return xOf(u, a); }), units.map(function (u) { return u.v; })) };
+    }).sort(function (p, q) { return q.r - p.r; });
+    var topCorr = corrRows[0];
+    var maxAbs = Math.max.apply(null, corrRows.map(function (c) { return Math.abs(c.r); })) || 1;
+    var corrList = corrRows.map(function (c, i) {
+      var on = c.a.key === axisKey;
+      return {
+        mark: RANKMARK[i], label: c.a.label, rv: (c.r >= 0 ? "+" : "−") + f2(Math.abs(c.r)),
+        markStyle: { fontSize: 11.5, color: on ? "oklch(0.42 0.13 250)" : "oklch(0.66 0.015 255)" },
+        onClick: function () { self.setState({ axis: c.a.key }); },
+        rowStyle: {
+          display: "grid", gridTemplateColumns: "20px minmax(0, 1fr) 68px 48px", alignItems: "center", gap: 9,
+          padding: "6px 8px", width: "100%", border: "none",
+          borderLeft: "3px solid " + (on ? "oklch(0.48 0.13 250)" : "transparent"),
+          borderBottom: "1px solid oklch(0.96 0.005 250)",
+          background: on ? "oklch(0.965 0.022 250)" : "transparent",
+          textAlign: "left", cursor: "pointer", fontFamily: "inherit"
+        },
+        labelStyle: { fontSize: 12.5, fontWeight: on ? 700 : 500, color: on ? "oklch(0.32 0.13 250)" : "oklch(0.3 0.02 255)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+        trackStyle: { display: "block", height: 8, background: "oklch(0.96 0.005 250)", borderRadius: 3, overflow: "hidden" },
+        fillStyle: { display: "block", height: "100%", width: Math.round(Math.abs(c.r) / maxAbs * 100) + "%", background: i === 0 ? "oklch(0.48 0.13 250)" : "oklch(0.75 0.06 250)", borderRadius: 3 },
+        valStyle: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 13, fontWeight: 600, textAlign: "right", color: i === 0 ? "oklch(0.32 0.13 250)" : "oklch(0.42 0.02 255)" }
+      };
+    });
+
+    var statsFor = function (defs, keyFn) {
+      return defs.map(function (t, i) {
+        var rows = typed.filter(function (s) { return keyFn(s) === i; });
+        var av = rows.length ? mean(rows.map(function (s) { return s.v; })) : 0;
+        return { t: t, i: i, n: rows.length, avg: av, high: rows.filter(function (s) { return s.v >= thr; }).length, ms: rows.map(function (s) { return s.m; }), vs: rows.map(function (s) { return s.v; }) };
+      });
+    };
+    var typeStats = statsFor(STYPES, function (s) { return s.ti; });
+    var rStats = statsFor(RTYPES, function (s) { return s.ri; });
+    var statList = basis === "rtype" ? rStats : typeStats;
+    var statBasis = basis === "rtype" ? "rtype" : "type";
+    var statTitle = basis === "rtype" ? "지역유형별 학업중단율" : "학교유형별 학업중단율";
+    var typeMax = Math.max.apply(null, statList.map(function (s) { return s.avg; }));
+    var worstType = typeStats.slice().sort(function (p, q) { return q.avg - p.avg; })[0];
+    var generalAvg = typeStats[0].avg;
+    var highSchools = typed.filter(function (s) { return s.v >= thr; }).length;
+    var typeBars = statList.map(function (s) {
+      var on = basis === statBasis && cf === s.i;
+      var rIn = s.n >= 3 ? pearson(s.ms.map(function (m) { return ax.v(m); }), s.vs) : 0;
+      var strongIn = Math.abs(rIn) >= 0.4;
+      return {
+        name: s.t.k, avg: f2(s.avg) + "%", n: s.n + "개교",
+        rv: s.n >= 3 ? (rIn >= 0 ? "+" : "−") + f2(Math.abs(rIn)) : "–",
+        rvStyle: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, fontWeight: 600, textAlign: "right", color: strongIn ? "oklch(0.36 0.13 250)" : "oklch(0.55 0.015 255)" },
+        onClick: function () { self.setState({ basis: statBasis, catFilter: on ? null : s.i }); },
+        rowStyle: {
+          display: "grid", gridTemplateColumns: "78px 40px minmax(0, 1fr) 50px 44px", alignItems: "center", gap: 8,
+          padding: "6px 8px", width: "100%", border: "none",
+          borderLeft: "3px solid " + (on ? s.t.c : "transparent"),
+          background: on ? s.t.bg : "transparent", textAlign: "left", cursor: "pointer", fontFamily: "inherit"
+        },
+        nameStyle: { fontSize: 12.5, fontWeight: on ? 700 : 500, color: on ? s.t.fg : "oklch(0.3 0.02 255)", whiteSpace: "nowrap" },
+        barStyle: { display: "block", height: 13, width: Math.max(4, Math.round(s.avg / typeMax * 100)) + "%", background: s.t.c, borderRadius: 3, opacity: cf == null || on ? 1 : 0.3 },
+        valStyle: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 13.5, fontWeight: 600, color: "oklch(0.26 0.02 255)", textAlign: "right" },
+        subStyle: { fontSize: 10, color: "oklch(0.62 0.015 255)", whiteSpace: "nowrap" }
+      };
+    });
+
+    var typeChips = cats.map(function (t, i) {
+      var on = cf === i;
+      return {
+        label: t.k, onClick: function () { self.setState({ catFilter: on ? null : i }); },
+        dotStyle: { width: 8, height: 8, borderRadius: 99, background: t.c, flex: "none" },
+        style: {
+          display: "flex", alignItems: "center", gap: 5, background: on ? t.bg : "#fff",
+          border: "1px solid " + (on ? t.c : "oklch(0.92 0.008 250)"), borderRadius: 99,
+          padding: "3px 9px", fontSize: 10.5, fontWeight: on ? 700 : 500,
+          color: on ? t.fg : "oklch(0.5 0.015 255)", whiteSpace: "nowrap", fontFamily: "inherit"
+        }
+      };
+    });
+    var chipBase = function (on) {
+      return {
+        background: on ? "oklch(0.48 0.13 250)" : "#fff",
+        border: "1px solid " + (on ? "oklch(0.48 0.13 250)" : "oklch(0.92 0.008 250)"),
+        borderRadius: 99, padding: "4px 11px", fontSize: 11.5, fontWeight: on ? 700 : 500,
+        color: on ? "#fff" : "oklch(0.5 0.015 255)", whiteSpace: "nowrap", fontFamily: "inherit"
+      };
+    };
+    var basisChips = [{ k: "all", label: "전체" }, { k: "type", label: "학교유형" }, { k: "rtype", label: "지역유형" }].map(function (b) {
+      return { label: b.label, style: chipBase(basis === b.k), onClick: function () { self.setState({ basis: b.k, catFilter: null }); } };
+    });
+    var axisChips = ["attend", "emotion", "basic", "violence", "ses"].map(function (k) {
+      var a = AXES[0];
+      AXES.forEach(function (x) { if (x.key === k) a = x; });
+      return { label: a.short, style: chipBase(a.key === axisKey), onClick: function () { self.setState({ axis: a.key }); } };
+    });
+
+    // scatter geometry
+    var sxs = units.map(function (u) { return xOf(u, ax); });
+    var sys = units.map(function (u) { return u.v; });
+    var yLo = Math.max(0, Math.min.apply(null, sys) - 0.12), yHi = Math.max.apply(null, sys) + 0.12;
+    var xPad = basis === "region" ? 5 : 4;
+    var xLo = Math.max(0, Math.min.apply(null, sxs) - xPad), xHi = Math.min(100, Math.max.apply(null, sxs) + xPad);
+    var px = function (v) { return 52 + ((v - xLo) / (xHi - xLo)) * 352; };
+    var py = function (v) { return 186 - ((v - yLo) / (yHi - yLo)) * 168; };
+    var fit = linfit(sxs, sys);
+    var rAll = pearson(sxs, sys);
+    var yTicks = [0, 1, 2, 3].map(function (k) { return yLo + (yHi - yLo) * (k / 3); });
+    var marks = [];
+    if (catBasis && cf == null) {
+      marks = statList.filter(function (s) { return s.n > 0; }).map(function (s) {
+        var mx = 0;
+        s.ms.forEach(function (m) { mx += ax.v(m); });
+        mx = mx / s.ms.length;
+        return { cx: px(mx).toFixed(1), cy: py(s.avg).toFixed(1), fill: s.t.c, label: s.t.k, lx: px(mx).toFixed(1), ly: (py(s.avg) - 13).toFixed(1) };
+      });
+    }
+    var scatter = {
+      grid: yTicks.map(function (v) { return { y: py(v).toFixed(1) }; }),
+      xTicks: [0, 1, 2, 3, 4].map(function (k) { return Math.round(xLo + (xHi - xLo) * (k / 4)); }),
+      marks: marks,
+      dots: units.map(function (u) {
+        return {
+          cx: px(xOf(u, ax)).toFixed(1), cy: py(u.v).toFixed(1), r: u.dotR, fill: u.color, opacity: u.op,
+          title: u.label + " · " + u.sub + " · 학업중단율 " + f2(u.v) + "% / " + ax.short + " " + f1(xOf(u, ax))
+        };
+      }),
+      linePath: px(xLo + 1).toFixed(1) + "," + py(fit.a + fit.b * (xLo + 1)).toFixed(1) + " " + px(xHi - 1).toFixed(1) + "," + py(fit.a + fit.b * (xHi - 1)).toFixed(1),
+      rLabel: "r = " + (rAll >= 0 ? "+" : "−") + f2(Math.abs(rAll)),
+      rSub: "n = " + units.length,
+      axisLabel: ax.short + " 위험도",
+      yLabel: "학업중단율 (%)"
+    };
+    var dotLabels = [];
+    if (basis === "region") {
+      var placed = [];
+      units.slice().sort(function (p, q) { return q.v - p.v; }).forEach(function (u) {
+        var cx = px(xOf(u, ax)), cy = py(u.v);
+        var right = cx < 320;
+        var lx = right ? cx + 8 : cx - 8, base = cy + 3.4;
+        var offs = [0, -10, 10, -19.6, 19.6, -29.4, 29.4], ly = base;
+        for (var oi = 0; oi < offs.length; oi++) {
+          var cand = base + offs[oi];
+          if (cand < 18 || cand > 182) continue;
+          var clash = placed.some(function (p) { return Math.abs(p.x - lx) < 42 && Math.abs(p.y - cand) < 9.4; });
+          if (!clash) { ly = cand; break; }
+          ly = Math.max(18, Math.min(182, base));
+        }
+        placed.push({ x: lx, y: ly });
+        dotLabels.push({ x: lx.toFixed(1), y: ly.toFixed(1), label: u.label, anchor: right ? "start" : "end" });
+      });
+    }
+    scatter.textEls = React.createElement("g", null,
+      dotLabels.map(function (l, i) { return svgText("dl" + i, l.x, l.y, l.label, { size: 9.5, weight: 500, fill: "oklch(0.44 0.02 255)", anchor: l.anchor }); }),
+      yTicks.map(function (v, i) { return svgText("sy" + i, 44, py(v) + 4, f2(v), { anchor: "end", mono: true, size: 11 }); }),
+      scatter.xTicks.map(function (v, i) { return svgText("sx" + i, px(v), 204, String(v), { mono: true, size: 11 }); }),
+      [svgText("sxl", 228, 226, scatter.axisLabel, { size: 12, weight: 600, fill: "oklch(0.45 0.02 255)" })],
+      [svgText("syl", 13, 100, scatter.yLabel, { size: 11, fill: "oklch(0.55 0.015 255)", anchor: "middle" })].map(function (el) {
+        return React.cloneElement(el, { transform: "rotate(-90 13 100)" });
+      })
+    );
+
+    var basisWord = basis === "region" ? "지원청별 " : basis === "rtype" ? "지역유형별 " : basis === "type" ? "학교유형별 " : "";
+    var chartTitle = basisWord + ax.short + " 위험과 학업중단율";
+    var chartSub = cf != null ? cats[cf].k + " " + units.length + "개교" : unitWord;
+    var helpOpen = !!st.help;
+    var unitName = basis === "region" ? "교육지원청" : "학교";
+    var rAbs = Math.abs(rAll);
+    var helpLines = [
+      { k: "가로축", v: ax.short + " 위험도 (0–100, 높을수록 위험)" },
+      { k: "세로축", v: "2027년 예상 학업중단율 (%)" },
+      { k: "점 1개", v: unitName + " 1곳 · " + units.length + "곳 표시" },
+      { k: "점선", v: "추세선 · 오른쪽 위로 기울면 요인이 클수록 중단율도 높음" },
+      { k: "r " + f2(rAbs), v: (rAbs >= 0.5 ? "뚜렷한" : rAbs >= 0.3 ? "어느 정도의" : "약한") + " 관련 (1에 가까울수록 강함)" }
+    ];
+    if (basis === "region") {
+      helpLines.splice(3, 0, { k: "점 색", v: "중단율 등급 · 노랑(보통) → 주황(높음) → 빨강(매우 높음)" });
+    } else if (catBasis) {
+      helpLines.splice(3, 0, { k: "점 색", v: (basis === "rtype" ? "지역유형" : "학교유형") + " (아래 범례) · 큰 점은 유형 평균" });
+    }
+    var bandLegend = BANDS.map(function (b, i) {
+      return {
+        label: b.label,
+        range: i === 0 ? "<1.0%" : i === 1 ? "1.0–1.3" : i === 2 ? "1.3–1.6" : "≥1.6",
+        dotStyle: { width: 9, height: 9, borderRadius: 99, background: b.solid, flex: "none" }
+      };
+    });
+    var toggleHelp = function () { self.setState({ help: !helpOpen }); };
+    var openHelp = function () { if (!helpOpen) self.setState({ help: true }); };
+    var closeHelp = function () { if (helpOpen) self.setState({ help: false }); };
+    var helpBtnStyle = {
+      width: 20, height: 20, borderRadius: 99, flex: "none", padding: 0, lineHeight: "18px",
+      fontSize: 12, fontWeight: 700, fontFamily: "'IBM Plex Mono', monospace",
+      background: helpOpen ? "oklch(0.48 0.13 250)" : "#fff",
+      border: "1px solid " + (helpOpen ? "oklch(0.48 0.13 250)" : "oklch(0.86 0.02 250)"),
+      color: helpOpen ? "#fff" : "oklch(0.48 0.13 250)"
+    };
+    var helpPanelStyle = {
+      position: "absolute", top: 26, right: 0, width: 286, zIndex: 5,
+      background: "#fff", border: "1px solid oklch(0.88 0.02 250)", borderRadius: 9,
+      boxShadow: "0 10px 26px oklch(0.45 0.03 255 / 0.16)", padding: "11px 13px 12px",
+      display: "flex", flexDirection: "column", gap: 7
+    };
+    var kpis3 = [
+      (function () { var bd = band(avg27); var b = self.badge(bd.label, bd); return { label: "전체 학업중단율", value: f2(avg27), unit: "%", badge: b.text, badgeStyle: b.style, sub: "2027년 예측" }; })(),
+      (function () { var b = self.badge(worstType.t.k, BANDS[3]); return { label: "학교유형별 최고", value: f2(worstType.avg), unit: "%", badge: b.text, badgeStyle: b.style, sub: "일반고 " + f2(generalAvg) + "%" }; })(),
+      (function () { var b = self.badge(f1(thr) + "%↑", BANDS[2]); return { label: "고위험 학교 비중", value: f1(highSchools / typed.length * 100), unit: "%", badge: b.text, badgeStyle: b.style, sub: highSchools + " / " + typed.length + "개교" }; })()
+    ];
+
+    return {
+      showNotice: showNotice, compareProvince: compareProvince,
+      tabs: tabs, isTab1: st.tab === 1, isTab2: st.tab === 2,
+      kpis3: kpis3, axisChips: axisChips, typeChips: typeChips, typeBars: typeBars,
+      corrList: corrList, scatter: scatter, basisChips: basisChips,
+      chartTitle: chartTitle, chartSub: chartSub, showTypeLegend: catBasis, statTitle: statTitle,
+      statRLabel: "r (" + ax.short + ")",
+      showBandLegend: basis === "region", bandLegend: bandLegend,
+      helpOpen: helpOpen, helpLines: helpLines, toggleHelp: toggleHelp,
+      openHelp: openHelp, closeHelp: closeHelp,
+      helpBtnStyle: helpBtnStyle, helpPanelStyle: helpPanelStyle,
+      modelNote: "선형 추세 외삽 + 지역 위험요인 가중 · 정책 개입 미반영 기준선",
+      baseYearLabel: String(BASE_YEAR),
+      hasDrill: filtersActive, drillLabel: st.school ? scopeName : (st.office || ""),
+      resetDrill: resetFilters,
+      questionLead: qs.lead, questionBody: qs.body,
+      kpis: kpis, legend: legend, tiles: tiles, trend: trend, methodItems: methodItems,
+      regionList: regionList, isTileView: isTileView, isListView: !isTileView, viewOptions: viewOptions,
+      mapNote: isTileView
+        ? "※ 지역을 선택하면 해당 지원청 분석으로 이동합니다"
+        : "※ 2027년 예상 학업중단율 내림차순 · 행 선택 시 해당 지원청 분석으로 이동",
+      fitRef: this._fit, fitStyle: fitStyle,
+      kpis2: kpis2, filters: filters, unitLabel: unitLabel, resetFilters: resetFilters,
+      resetBtnStyle: {
+        fontSize: 11.5, fontWeight: 500, borderRadius: 99, padding: "4px 12px",
+        background: filtersActive ? "#fff" : "oklch(0.975 0.004 250)",
+        border: "1px solid " + (filtersActive ? "oklch(0.86 0.02 250)" : "oklch(0.93 0.008 250)"),
+        color: filtersActive ? "oklch(0.4 0.02 255)" : "oklch(0.72 0.015 255)",
+        cursor: filtersActive ? "pointer" : "default"
+      },
+      schoolRows: schoolRows, rankScope: rankScope, rankCount: rankCount, rankNote: rankNote,
+      factors: factors, scopeLabel: scopeName,
+      factorNote: "기여도는 2027년 예측 모델에서 각 요인이 차지하는 상대 가중치이며 합계 100%입니다. 학교 단위 수치는 5명 미만 항목을 통합한 비식별 집계값입니다.",
+      radar: radar, radarScope: scopeName,
+      attend: attend
+    };
+  }
+}
+
+</script>
+</body>
+</html>
