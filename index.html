@@ -1695,7 +1695,7 @@ class Component extends DCLogic {
         if (selSchool) c.push({ label: nameOf(selSchool) });
         return c.map(function (x, i) { var last = i === c.length - 1; return { label: (i ? "→ " : "") + x.label, style: "white-space:nowrap; font-weight:" + (last ? "700" : "500") + "; color:" + (last ? "#063a74" : "oklch(0.48 0.015 255)") }; });
       })(),
-      trendTitle: rIdx >= 0 ? "연도별 추이" : "연도별 학업중단 추이", trendHasReason: rIdx >= 0, trendReason: rIdx >= 0 ? DROP_KINDS[rIdx].k : "",
+      trendTitle: rIdx >= 0 ? "연도별 학업중단 추이" : "연도별 학업중단 추이", trendHasReason: rIdx >= 0, trendReason: rIdx >= 0 ? DROP_KINDS[rIdx].k : "",
       reasonOpts: [{ value: "", label: "전체 학업중단" }].concat(DROP_KINDS.map(function (d) { return { value: d.k, label: d.k }; })), reasonValue: st.selReason || "", onReason: function (e) { self.setState({ selReason: e.target.value || null }); },
       showRegionDetail: isOverview && regionSel && !selSchool, regionName: st.sigun !== "전체" ? st.sigun : st.office,
       schoolQ: st.schoolQ || "", onSchoolQ: function (e) { self.setState({ schoolQ: e.target.value, schoolPage: 0 }); }, pager: pager,
