@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<span style="position:relative; display:inline-flex; align-items:center; vertical-align:top; line-height:0; flex:none; z-index:2">
+  <button onMouseEnter="{{ enter }}" onMouseLeave="{{ leave }}" onClick="{{ toggle }}" aria-label="차트 설명 보기" style="appearance:none; width:16px; height:16px; border-radius:50%; border:1.5px solid #1c589c; background:#fff; color:#1c589c; font-size:10.5px; font-weight:800; font-family:'Pretendard GOV Variable', 'Pretendard GOV', system-ui, sans-serif; font-style:normal; line-height:1; padding:0; display:inline-flex; align-items:center; justify-content:center; cursor:pointer" style-hover="background:oklch(0.95 0.03 250); border-color:#1c589c">i</button>
+  <sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ stop }}" onMouseEnter="{{ enter }}" onMouseLeave="{{ leave }}" style="{{ popStyle }}">
+      <div style="font-size:13px; font-weight:700; color:#063a74; font-style:normal; line-height:1.4; padding-bottom:6px; border-bottom:1px solid #cdd1d5">{{ title }}</div>
+      <sc-if value="{{ hasDesc }}" hint-placeholder-val="{{ true }}">
+        <div style="font-size:12.5px; line-height:1.5; color:oklch(0.34 0.02 255); font-style:normal; text-wrap:pretty; padding-top:6px">{{ desc }}</div>
+      </sc-if>
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="0">
+        <div style="display:grid; grid-template-columns:36px minmax(0,1fr); gap:8px; font-size:12.5px; line-height:1.5; font-style:normal; padding-top:6px">
+          <span style="color:oklch(0.55 0.015 255); font-weight:600">{{ r.k }}</span>
+          <span style="color:oklch(0.32 0.02 255); text-wrap:pretty">{{ r.v }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+</span>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;330px&quot;,&quot;height&quot;:&quot;240px&quot;},&quot;info&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;object&quot;},&quot;align&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;left&quot;,&quot;right&quot;],&quot;default&quot;:&quot;left&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { hover: false, pin: false };
+  componentDidMount() {
+    this._id = Math.random().toString(36).slice(2);
+    this._doc = () => { if (this.state.pin) this.setState({ pin: false }); };
+    this._other = (e) => { if (e.detail !== this._id && (this.state.pin || this.state.hover)) this.setState({ pin: false, hover: false }); };
+    document.addEventListener("click", this._doc);
+    window.addEventListener("infotip-open", this._other);
+  }
+  componentWillUnmount() { document.removeEventListener("click", this._doc); window.removeEventListener("infotip-open", this._other); }
+  _announce() { try { window.dispatchEvent(new CustomEvent("infotip-open", { detail: this._id })); } catch (e) {} }
+  renderVals() {
+    var i = this.props.info || {};
+    var keys = [["산식", "formula"], ["설명", "meaning"], ["집계 단위", "unit"], ["기준 기간", "period"], ["데이터 출처", "source"], ["필터 적용", "scope"]];
+    var right = !!this.state.flip;
+    var side = (e) => { var el = e && e.currentTarget; if (!el || !el.getBoundingClientRect) return false; var r = el.getBoundingClientRect(); return r.left + 262 > (window.innerWidth || 1200); };
+    return {
+      open: this.state.hover || this.state.pin,
+      title: i.title || "", hasDesc: !!i.desc, desc: i.desc || "",
+      rows: keys.filter(function (k) { return i[k[1]]; }).map(function (k) { return { k: k[0], v: i[k[1]] }; }),
+      enter: (e) => this._announce() || this.setState({ hover: true, flip: this.state.hover || this.state.pin ? this.state.flip : side(e) }),
+      leave: () => this.setState({ hover: false }),
+      toggle: (e) => { e.stopPropagation(); this._announce(); var f = side(e); this.setState((s) => ({ pin: !s.pin, flip: s.hover ? s.flip : f })); },
+      stop: (e) => e.stopPropagation(),
+      popStyle: "position:absolute; top:20px; " + (right ? "right:-6px;" : "left:-6px;") + " z-index:90; width:min(260px, calc(100vw - 24px)); background:#fff; border:1px solid oklch(0.86 0.02 250); border-radius:2px; box-shadow:0 4px 12px oklch(0.3 0.03 255 / 0.12); padding:10px 12px; display:flex; flex-direction:column; gap:0; text-align:left; font-weight:400; white-space:normal; line-height:1.5; word-break:keep-all; cursor:default"
+    };
+  }
+}
+</script>
+</body>
+</html>
