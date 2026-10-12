@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>고등학교 학업 중단</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -807,7 +806,7 @@ class Component extends DCLogic {
     var opt = function (arr) { return arr.map(function (v) { return { value: String(v), label: String(v) }; }); };
     var schoolOpts = schoolPool.map(function (s) { return { value: s.id, label: nameOf(s) + (restricted ? "" : " (" + s.region.replace(/(시|군)$/, "") + ")") }; });
     var filters = [
-      mk("학년도", String(year), opt(YEARS), function (e) { self.setState({ year: parseInt(e.target.value, 10) }); }),
+      mk("학년도", String(year), opt(YEARS.slice().sort(function (x, y) { return y - x; })), function (e) { self.setState({ year: parseInt(e.target.value, 10) }); }),
       mk("교육지원청", st.office, opt(["전체"].concat(OFFICES)), function (e) { self.setState(cl({ office: e.target.value, sigun: "전체", school: "전체", preSel: null })); }),
       mk("학교유형", st.stype, opt(["전체"].concat(STYPES.map(function (t) { return t.k; }))), function (e) { self.setState(cl({ stype: e.target.value, school: "전체", preSel: null })); }),
       mk("학교", st.school, [{ value: "전체", label: "전체" }].concat(schoolOpts), function (e) {
