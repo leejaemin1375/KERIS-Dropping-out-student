@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title> 고등학교 학업중단 현황 </title>
+<title>고등학교 학업 중단</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -52,7 +52,7 @@
               <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="4">
                 <option value="{{ o.value }}">{{ o.label }}</option>
               </sc-for>
-    </select></span></label></sc-for></div>
+    </select><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="oklch(0.45 0.02 255)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; right:9px; top:50%; transform:translateY(-50%); pointer-events:none"><polyline points="6 9 12 15 18 9"></polyline></svg></span></label></sc-for></div>
     </div>
     <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; padding:5px 10px; border-top:1px solid oklch(0.94 0.005 250); background:oklch(0.985 0.003 250)">
     <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; flex:1 1 auto; min-width:0">
@@ -82,7 +82,7 @@
             
           </sc-if>
         </div>
-        <div style="display:flex; align-items:center; gap:6px; min-width:0">
+        <div style="display:flex; align-items:center; gap:6px; min-width:0; min-height:22px">
           <sc-if value="{{ k.showBadge }}" hint-placeholder-val="{{ false }}">
             <span style="{{ k.badgeStyle }}">{{ k.badge }}</span>
           </sc-if>
@@ -92,7 +92,7 @@
             <span style="white-space:nowrap">{{ k.subPost }}</span>
           </span>
         </div>
-        <div style="display:flex; align-items:baseline; gap:6px; margin-top:2px; padding-top:4px; border-top:1px solid oklch(0.95 0.005 250); font-size:12px; color:oklch(0.55 0.015 255); flex-wrap:wrap">
+        <div style="display:flex; align-items:baseline; gap:6px; margin-top:auto; padding-top:4px; border-top:1px solid oklch(0.95 0.005 250); font-size:12px; color:oklch(0.55 0.015 255); flex-wrap:wrap">
           <span style="white-space:nowrap">전년 대비</span><span style="{{ k.yoyStyle }}">{{ k.yoy }}</span>
         </div>
       </div>
@@ -286,7 +286,7 @@
       <div style="{{ scView.distStyle }}">
       <div style="display:flex; flex-direction:column; align-items:stretch; gap:6px">
         <div style="min-width:0">
-          <div style="display:flex; align-items:center; gap:8px; min-width:0"><span style="font-size:15.5px; font-weight:700; color:#063a74; flex:none; line-height:1.35; white-space:nowrap" title="">{{ scatter.title }}</span><span style="flex:none; display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; line-height:0; align-self:center"><dc-import name="InfoTip" info="{{ infos.scatter }}" hint-size="15px,15px"></dc-import></span><button onClick="{{ dl.scatter }}" title="엑셀 다운로드" aria-label="엑셀 다운로드" style="appearance:none; flex:none; margin-left:auto; width:26px; height:26px; display:inline-flex; align-items:center; justify-content:center; padding:0; background:#fff; border:1px solid #cdd1d5; border-radius:2px; color:#063a74; cursor:pointer" style-hover="background:oklch(0.96 0.02 250); border-color:#1c589c"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></button></div>
+          <div style="display:flex; align-items:center; gap:8px; min-width:0"><span style="flex:none; font-size:14.5px; font-weight:700; color:#063a74; background:oklch(0.93 0.035 250); border:1px solid oklch(0.84 0.05 250); border-radius:2px; padding:1px 8px; line-height:1.4; white-space:nowrap">{{ scatter.titleHi }}</span><span style="font-size:15.5px; font-weight:700; color:#063a74; flex:none; line-height:1.35; white-space:nowrap; margin-left:-5px" title="">{{ scatter.titleRest }}</span><span style="flex:none; display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; line-height:0; align-self:center"><dc-import name="InfoTip" info="{{ infos.scatter }}" hint-size="15px,15px"></dc-import></span><button onClick="{{ dl.scatter }}" title="엑셀 다운로드" aria-label="엑셀 다운로드" style="appearance:none; flex:none; margin-left:auto; width:26px; height:26px; display:inline-flex; align-items:center; justify-content:center; padding:0; background:#fff; border:1px solid #cdd1d5; border-radius:2px; color:#063a74; cursor:pointer" style-hover="background:oklch(0.96 0.02 250); border-color:#1c589c"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></button></div>
         </div>
         <div style="display:flex; align-items:center; gap:12px; flex-wrap:nowrap; justify-content:flex-end">
         <label style="display:flex; align-items:center; gap:6px">
@@ -644,7 +644,7 @@ class Component extends DCLogic {
   _select(s) {
     var st = this.state;
     var pre = st.school !== "전체" && st.preSel ? st.preSel : { office: st.office, stype: st.stype, sigun: st.sigun };
-    return Object.assign({ school: s.id, stype: s.type, hoverId: null, preSel: pre, schoolPage: null, scPick: false }, st.sigun === "전체" ? { office: s.office } : {});
+    return Object.assign({ school: s.id, stype: s.type, hoverId: null, preSel: pre, schoolPage: null, scPick: false, activeQ: null }, st.sigun === "전체" ? { office: s.office } : {});
   }
 
   _unselect() {
@@ -781,12 +781,13 @@ class Component extends DCLogic {
 
     // ---- condition chips
     var defYear = parseInt(self.props.initialYear, 10) || 2025;
+    var cl = function (o) { return Object.assign(self.state.school !== "전체" ? self._unselect() : {}, { activeQ: null, hoverId: null, schoolPage: null }, o); };
     var condChips = [{ label: year + "학년도", clearable: year !== defYear, onClear: function () { self.setState({ year: defYear }); } }];
-    if (st.sigun !== "전체") condChips.push({ label: "시·군 · " + st.sigun, clearable: true, onClear: function () { self.setState({ sigun: "전체", school: "전체" }); } });
-    if (st.office !== "전체") condChips.push({ label: st.office, clearable: true, onClear: function () { self.setState({ office: "전체", school: "전체" }); } });
+    if (st.sigun !== "전체") condChips.push({ label: "시·군 · " + st.sigun, clearable: true, onClear: function () { self.setState(cl({ sigun: "전체", school: "전체", preSel: null })); } });
+    if (st.office !== "전체") condChips.push({ label: st.office, clearable: true, onClear: function () { self.setState(cl({ office: "전체", school: "전체", preSel: null })); } });
     if (!regionSel) condChips.push({ label: "경기도 전체", clearable: false });
     if (selSchool) condChips.push({ label: nameOf(selSchool), clearable: true, onClear: function () { self.setState(self._unselect()); } });
-    if (st.stype !== "전체") condChips.push({ label: st.stype, clearable: true, onClear: function () { self.setState({ stype: "전체", school: "전체" }); } });
+    if (st.stype !== "전체") condChips.push({ label: st.stype, clearable: true, onClear: function () { self.setState(cl({ stype: "전체", school: "전체", preSel: null })); } });
     if (grade !== "전체") condChips.push({ label: grade, clearable: true, onClear: function () { self.setState({ grade: "전체" }); } });
     var showBack = st.office !== "전체" || st.sigun !== "전체" || !!selSchool;
     var backToAll = function () { self.setState({ office: "전체", sigun: "전체", school: "전체", stype: st.preSel ? st.preSel.stype : st.stype, preSel: null }); };
@@ -807,8 +808,8 @@ class Component extends DCLogic {
     var schoolOpts = schoolPool.map(function (s) { return { value: s.id, label: nameOf(s) + (restricted ? "" : " (" + s.region.replace(/(시|군)$/, "") + ")") }; });
     var filters = [
       mk("학년도", String(year), opt(YEARS), function (e) { self.setState({ year: parseInt(e.target.value, 10) }); }),
-      mk("교육지원청", st.office, opt(["전체"].concat(OFFICES)), function (e) { self.setState({ office: e.target.value, sigun: "전체", school: "전체", preSel: null }); }),
-      mk("학교유형", st.stype, opt(["전체"].concat(STYPES.map(function (t) { return t.k; }))), function (e) { self.setState({ stype: e.target.value, school: "전체", preSel: null }); }),
+      mk("교육지원청", st.office, opt(["전체"].concat(OFFICES)), function (e) { self.setState(cl({ office: e.target.value, sigun: "전체", school: "전체", preSel: null })); }),
+      mk("학교유형", st.stype, opt(["전체"].concat(STYPES.map(function (t) { return t.k; }))), function (e) { self.setState(cl({ stype: e.target.value, school: "전체", preSel: null })); }),
       mk("학교", st.school, [{ value: "전체", label: "전체" }].concat(schoolOpts), function (e) {
         var v = e.target.value;
         if (v === "전체") { self.setState(self._unselect()); return; }
@@ -1239,7 +1240,7 @@ class Component extends DCLogic {
     var vMax = Math.max.apply(null, IND.map(function (a) { return cur.ind[a.key]; })) * 1.15 || 1;
     var PCOLS = isAllProv ? "minmax(96px, 140px) minmax(0, 1fr) 66px" : "minmax(96px, 140px) minmax(0, 1fr) 66px 72px 68px";
     var alt = {
-      showAvg: !isAllProv, selLabel: isAllProv ? "경기도 전체" : "선택 대상", barHead: "비율 비교",
+      showAvg: !isAllProv, selLabel: isAllProv ? "경기도 전체" : (selSchool ? nameOf(selSchool) : "선택 대상 · " + (scopeName === "경기도 전체" ? "경기도" : scopeName) + (st.stype !== "전체" ? " " + st.stype : (scopeName === "경기도 전체" ? " 전체" : ""))), barHead: "비율 비교",
       headStyle: "display:grid; grid-template-columns:" + PCOLS + "; gap:8px; align-items:center; padding:0 8px 4px; border-bottom:1px solid #cdd1d5; font-size:11.5px; color:oklch(0.55 0.015 255); white-space:nowrap",
       gradeNote: grade !== "전체" ? "학교폭력 조치 지표는 학년 구분 자료가 없어 전 학년 기준입니다." : "",
       rows: IND.map(function (a) {
@@ -1349,14 +1350,16 @@ class Component extends DCLogic {
 
     // ---- quadrant scatter
     var userTypeSc = selSchool ? (st.preSel ? st.preSel.stype : "전체") : st.stype;
-    var basePool = SCHOOLS.filter(function (s) { return userTypeSc === "전체" || s.type === userTypeSc; });
+    var scOffice = selSchool && st.preSel ? st.preSel.office : st.office, scSigun = selSchool && st.preSel ? st.preSel.sigun : st.sigun;
+    if (selSchool && scOffice !== "전체" && selSchool.office !== scOffice) { scOffice = selSchool.office; }
+    var basePool = SCHOOLS.filter(function (s) { return (userTypeSc === "전체" || s.type === userTypeSc) && (scOffice === "전체" || s.office === scOffice) && (scSigun === "전체" || s.region === scSigun); });
     var presentTypes = STYPES.filter(function (t) { return basePool.some(function (s) { return s.type === t.k; }); }).map(function (t) { return t.k; });
     var scType = st.scType && presentTypes.indexOf(st.scType) >= 0 ? st.scType : "전체";
     var pool = scType === "전체" ? basePool : basePool.filter(function (s) { return s.type === scType; });
     var typeChips = ["전체"].concat(presentTypes).map(function (k) {
       var on = k === scType, t = STYPES.filter(function (x) { return x.k === k; })[0];
       return {
-        label: k, onClick: function () { self.setState({ scType: k, hoverId: null }); },
+        label: k, onClick: function () { self.setState(Object.assign(self.state.school !== "전체" ? self._unselect() : {}, { scType: k, hoverId: null, activeQ: null })); },
         dotStyle: { width: 7, height: 7, borderRadius: 2, background: t ? t.c : "oklch(0.6 0.02 255)", flex: "none", display: t ? "inline-block" : "none" },
         style: {
           display: "inline-flex", alignItems: "center", gap: 5, fontSize: 12.5, fontWeight: on ? 700 : 500,
@@ -1454,7 +1457,7 @@ class Component extends DCLogic {
       return {
         k: o.k, name: o.name, value: qp(o.k), count: q[o.k] + "개교", pct: Math.round(q[o.k] / N * 100) + "%", note: o.note || "", hasNote: !!o.note,
         pctStyle: { fontSize: 12, fontWeight: 500, color: focus ? "#7a5200" : "oklch(0.5 0.015 255)", whiteSpace: "nowrap" },
-        onClick: function () { self.setState({ activeQ: on ? null : o.k, hoverId: null }); },
+        onClick: function () { var base = self.state.school !== "전체" ? self._unselect() : {}; self.setState(Object.assign(base, { activeQ: on ? null : o.k, hoverId: null, scPick: false })); },
         style: {
           appearance: "none", textAlign: "left", display: "flex", flexDirection: "column", justifyContent: "center", gap: 1, minWidth: 0, flex: "1 1 auto",
           padding: "3px 8px", borderRadius: 2, fontFamily: "inherit", cursor: "pointer",
@@ -1468,12 +1471,12 @@ class Component extends DCLogic {
     });
     var scatter = {
       quadSummary: quadSummary,
-      title: axis.metric + axis.josa + " 학업중단율의 학교별 분포",
-      sub: year + "학년도 · " + gradeName + " · 비교 집단 경기도 " + (scType === "전체" ? "" : scType + " ") + pts.length + "개교 · " + (selSchool ? nameOf(selSchool) + " 강조" : regionSel ? scopeName + " 소속 학교 강조" : "X축 " + axis.metric + " / Y축 학업중단율"),
+      title: axis.metric + axis.josa + " 학업중단율의 학교별 분포", titleHi: axis.metric, titleRest: axis.josa.trim() + " 학업중단율의 학교별 분포",
+      sub: year + "학년도 · " + gradeName + " · 비교 집단 " + (scSigun !== "전체" ? scSigun : scOffice !== "전체" ? scOffice : "경기도") + " " + (scType === "전체" ? "" : scType + " ") + pts.length + "개교 · " + (selSchool ? nameOf(selSchool) + " 강조" : regionSel ? scopeName + " 소속 학교 강조" : "X축 " + axis.metric + " / Y축 학업중단율"),
       axisKey: axis.key, typeChips: typeChips,
       typeValue: scType,
       typeOpts: ["전체"].concat(presentTypes).map(function (k) { return { value: k, label: k }; }),
-      onType: function (e) { self.setState({ scType: e.target.value, hoverId: null, activeQ: null }); },
+      onType: function (e) { var v = e.target.value; self.setState(Object.assign(self.state.school !== "전체" ? self._unselect() : {}, { scType: v, hoverId: null, activeQ: null })); },
       typeSelectStyle: {
         appearance: "none", WebkitAppearance: "none", background: "#fff",
         border: "1px solid " + (scType !== "전체" ? "oklch(0.72 0.09 250)" : "#cdd1d5"),
@@ -1498,7 +1501,7 @@ class Component extends DCLogic {
           stroke: isSel ? "#1e2124" : isHov ? "#1e2124" : "transparent", sw: isSel ? 1.8 : isHov ? 1.6 : 5,
           onEnter: function () { self.setState({ hoverId: p.s.id }); },
           onLeave: function () { self.setState({ hoverId: null }); },
-          onClick: function () { var cur = self.state; self.setState(isSel ? Object.assign(self._unselect(), { scPick: false }) : { school: p.s.id, hoverId: null, schoolPage: null, scPick: false, preSel: cur.school !== "전체" && cur.preSel ? cur.preSel : { office: cur.office, stype: cur.stype, sigun: cur.sigun } }); }
+          onClick: function () { var cur = self.state; self.setState(isSel ? Object.assign(self._unselect(), { scPick: false }) : (function () { var pre = cur.school !== "전체" && cur.preSel ? cur.preSel : { office: cur.office, stype: cur.stype, sigun: cur.sigun }; return { school: p.s.id, hoverId: null, schoolPage: null, scPick: false, activeQ: null, preSel: pre, office: pre.office, stype: pre.stype, sigun: pre.sigun }; })()); }
         };
       }),
       typeLegend: STYPES.map(function (t) { return { label: t.k, dotStyle: { width: 9, height: 9, borderRadius: 2, background: t.c, flex: "none" } }; }),
@@ -1626,7 +1629,7 @@ class Component extends DCLogic {
 
     var tabs = [["overview", "① 전체 현황"], ["detail", "② 지역·학교 상세"]].map(function (t) {
       var on = (st.tab || "overview") === t[0];
-      return { label: t[1], onClick: function () { self.setState({ tab: t[0], hoverId: null }, function () { window.scrollTo(0, 0); }); }, style: "appearance:none; border:none; font-size:13px; font-weight:700; padding:5px 11px; white-space:nowrap; background:" + (on ? "#063a74" : "#fff") + "; color:" + (on ? "#fff" : "oklch(0.42 0.04 255)") };
+      return { label: t[1], onClick: function () { var cs = self.state, ex = {}; if (t[0] === "detail" && cs.sigun !== "전체") { var of = OFFICE[cs.sigun] || cs.office; ex = { sigun: "전체", office: of }; if (cs.preSel) ex.preSel = Object.assign({}, cs.preSel, { sigun: "전체", office: of }); } self.setState(Object.assign({ tab: t[0], hoverId: null }, ex), function () { window.scrollTo(0, 0); }); }, style: "appearance:none; border:none; font-size:13px; font-weight:700; padding:5px 11px; white-space:nowrap; background:" + (on ? "#063a74" : "#fff") + "; color:" + (on ? "#fff" : "oklch(0.42 0.04 255)") };
     });
     var tabDesc = isOverview ? "경기도 전체 규모·추이 → 시·군별 차이 → 주요 학업중단 사유" : "선택 지역·학교의 현황 → 사유 → 학업중단 주요 요인 → 학교별 분포·상세 추이";
     var scopeNote = isOverview
@@ -1698,7 +1701,7 @@ class Component extends DCLogic {
       schoolQ: st.schoolQ || "", onSchoolQ: function (e) { self.setState({ schoolQ: e.target.value, schoolPage: 0 }); }, pager: pager,
       scopeInfo: { title: "필터 적용 범위", desc: scopeNote }, tblScroll: tblScroll,
       showSelBar: isOverview && !!selSchool, selName: selSchool ? nameOf(selSchool) : "",
-      goDetail: function () { self.setState(Object.assign({ tab: "detail", hoverId: null }, selSchool ? { sigun: "전체", office: selSchool.office } : {}), function () { var top = function () { try { window.scrollTo(0, 0); document.documentElement.scrollTop = 0; document.body.scrollTop = 0; document.querySelectorAll("*").forEach(function (el) { if (el.scrollTop > 0 && el.scrollHeight > el.clientHeight + 4) { var o = getComputedStyle(el).overflowY; if (o === "auto" || o === "scroll") el.scrollTop = 0; } }); } catch (e) {} }; top(); requestAnimationFrame(top); setTimeout(top, 60); }); }, tabs: tabs, tabDesc: tabDesc, scopeNote: scopeNote, L: L, isCarto: !schoolLevel, isTable: schoolLevel, schoolRows: schoolRows,
+      goDetail: function () { self.setState(Object.assign({ tab: "detail", hoverId: null }, selSchool ? { sigun: "전체", office: selSchool.office, preSel: { office: selSchool.office, stype: st.preSel ? st.preSel.stype : "전체", sigun: "전체" } } : st.sigun !== "전체" ? { sigun: "전체", office: OFFICE[st.sigun] || st.office } : {}), function () { var top = function () { try { window.scrollTo(0, 0); document.documentElement.scrollTop = 0; document.body.scrollTop = 0; document.querySelectorAll("*").forEach(function (el) { if (el.scrollTop > 0 && el.scrollHeight > el.clientHeight + 4) { var o = getComputedStyle(el).overflowY; if (o === "auto" || o === "scroll") el.scrollTop = 0; } }); } catch (e) {} }; top(); requestAnimationFrame(top); setTimeout(top, 60); }); }, tabs: tabs, tabDesc: tabDesc, scopeNote: scopeNote, L: L, isCarto: !schoolLevel, isTable: schoolLevel, schoolRows: schoolRows,
       clearRegion: clearRegion, clearRegionStyle: clearRegionStyle, clearRegionLabel: isOverview ? "지역 선택 해제" : "전체 학교 보기",
       cartoTitle: cartoTitle, overSum: overSum, infos: infos,
       condChips: condChips, showBack: showBack, backToAll: backToAll,
